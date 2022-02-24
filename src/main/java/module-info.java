@@ -10,6 +10,7 @@ module com.example.irrigationapp {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires javafx.graphics;
+    requires java.sql;
 
     opens view to javafx.fxml;
     exports view;
