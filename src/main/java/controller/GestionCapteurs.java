@@ -10,7 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Books;
 import model.Utilisateur;
 
 import java.net.URL;
@@ -25,7 +24,7 @@ import java.util.ResourceBundle;
 
 
 
-public class MainController implements Initializable {
+public class GestionCapteurs implements Initializable {
 
     @FXML
     private TextField idField;

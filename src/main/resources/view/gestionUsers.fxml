@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionUsers">
     <children>
-        <VBox layoutX="26.0" layoutY="22.0" spacing="15.0">
+        <VBox layoutX="237.0" layoutY="244.0" prefHeight="183.0" prefWidth="85.0" spacing="15.0">
             <children>
                 <Label text="ID">
                     <font>
@@ -41,7 +41,7 @@
                 </Label>
             </children>
         </VBox>
-        <VBox layoutX="87.0" layoutY="22.0" prefHeight="130.0" prefWidth="129.0" spacing="10.0">
+        <VBox layoutX="373.0" layoutY="244.0" prefHeight="215.0" prefWidth="219.0" spacing="10.0">
             <children>
                 <TextField fx:id="idField" />
                 <TextField fx:id="titleField" />
@@ -51,20 +51,20 @@
 
             </children>
         </VBox>
-        <HBox layoutX="26.0" layoutY="202.0" spacing="10.0">
+        <HBox layoutX="273.0" layoutY="459.0" spacing="10.0">
             <children>
                 <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
                 <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
                 <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
             </children>
         </HBox>
-        <TableView fx:id="TableView" layoutX="238.0" layoutY="22.0" prefHeight="210.0" prefWidth="400.0">
+        <TableView fx:id="TableView" layoutX="1.0" layoutY="1.0" prefHeight="215.0" prefWidth="700.0">
             <columns>
-                <TableColumn fx:id="idColumn" prefWidth="35.0" text="ID" />
-                <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Title" />
-                <TableColumn fx:id="authorColumn" prefWidth="120.0" text="Author" />
-                <TableColumn fx:id="yearColumn" prefWidth="60.0" text="Year" />
-                <TableColumn fx:id="pagesColumn" prefWidth="60.0" text="Pages" />
+                <TableColumn fx:id="idColumn" prefWidth="73.59997248649597" text="ID" />
+                <TableColumn fx:id="titleColumn" prefWidth="132.80001831054688" text="Title" />
+                <TableColumn fx:id="authorColumn" prefWidth="133.6000518798828" text="Author" />
+                <TableColumn fx:id="yearColumn" prefWidth="155.20001220703125" text="Year" />
+                <TableColumn fx:id="pagesColumn" prefWidth="203.20001220703125" text="Pages" />
             </columns>
         </TableView>
     </children>
