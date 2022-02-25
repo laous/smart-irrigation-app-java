@@ -4,7 +4,7 @@ public class Utilisateur {
     int idUser; // l'id primaire de la table user
     String nom;
     String prenom;
-    String email;
+    String username;
     String password;
     String cin;
 
@@ -12,11 +12,11 @@ public class Utilisateur {
 
     }
 
-    public Utilisateur(int idUser, String nom, String prenom, String email, String password, String cin) {
+    public Utilisateur(int idUser, String nom, String prenom, String username, String password, String cin) {
         this.idUser = idUser;
         this.nom = nom;
         this.prenom = prenom;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.cin = cin;
     }
@@ -33,8 +33,8 @@ public class Utilisateur {
         return cin;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public String getPrenom() {
@@ -57,8 +57,8 @@ public class Utilisateur {
         this.nom = nom;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String email) {
+        this.username = username;
     }
 
     public void setCin(String cin) {
@@ -72,7 +72,7 @@ public class Utilisateur {
                 ", prenom='" + prenom + '\'' +
                 ", nom='" + nom + '\'' +
                 ", cin='" + cin + '\'' +
-                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }
