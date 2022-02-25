@@ -8,14 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Administrateur;
+import model.Technicien;
 import model.Utilisateur;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 public class GestionUsers implements Initializable {
 
-    private UtilisateurUtile<Utilisateur> utilisateurUtile;
+    private UtilisateurUtile<Utilisateur> utilisateurUtile = new UtilisateurUtile<>(getConnection());
 
     @FXML
     private TextField idUtilisateur;
@@ -43,6 +43,11 @@ public class GestionUsers implements Initializable {
 
     @FXML
     private PasswordField passwordUtilisateur;
+
+    @FXML
+    private TextField typeUtilisateur;
+
+    @FXML Label errorLabel;
 
     @FXML
     private Button insertButton;
@@ -73,33 +78,127 @@ public class GestionUsers implements Initializable {
 
     @FXML TableColumn<Utilisateur, String> passwordColumn;
 
-    @FXML
-    private void insertButton() {
-        Utilisateur user = new Utilisateur(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),nomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+    @FXML TableColumn<Utilisateur, String> typeColumn;
 
+    public void setErrorLabel(String s){
+        errorLabel.setText(s);
     }
 
 
     @FXML
-    private void updateButton() {
+    private void insertButton() throws SQLException {
+
+        if(typeUtilisateur.getText().equals("utilisateur")){
+            Utilisateur user = new Utilisateur(nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.ajouterUtilisateur(user);
+            if (status) {
+                setErrorLabel("Utilisateur ajoute");
+            } else {
+                setErrorLabel("Utilisateur non ajoute");
+            }
+        }else if(typeUtilisateur.getText().equals("admin")){
+            Administrateur user = new Administrateur(nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.ajouterUtilisateur(user);
+            if (status) {
+                setErrorLabel("Admin ajoute");
+            } else {
+                setErrorLabel("Admin non ajoute");
+            }
+        }else if(typeUtilisateur.getText().equals("technicien")){
+            Technicien user = new Technicien(nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.ajouterUtilisateur(user);
+            if (status) {
+                setErrorLabel("Technicien ajoute");
+            } else {
+                setErrorLabel("Technicien non ajoute");
+            }
+        }else{
+            setErrorLabel("Utilisateur non ajoute, type est incorrect.");
+        }
+
 
     }
 
+
+
+
     @FXML
-    private void deleteButton() {
+    private void updateButton() throws SQLException {
+        if(typeUtilisateur.getText().equals("utilisateur")){
+            Utilisateur user = new Utilisateur(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.majUtilisateur(user);
+            if (status) {
+                setErrorLabel("Utilisateur modifie");
+            } else {
+                setErrorLabel("Utilisateur non modifie");
+            }
+        }else if(typeUtilisateur.getText().equals("admin")){
+            Administrateur user = new Administrateur(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.majUtilisateur(user);
+            if (status) {
+                setErrorLabel("Admin modifie");
+            } else {
+                setErrorLabel("Admin non modifie");
+            }
+        }else if(typeUtilisateur.getText().equals("technicien")){
+            Technicien user = new Technicien(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.majUtilisateur(user);
+            if (status) {
+                setErrorLabel("Technicien modifie");
+            } else {
+                setErrorLabel("Technicien non modifie");
+            }
+        }else{
+            setErrorLabel("Utilisateur non modifie, type est incorrect.");
+        }
+    }
+
+    @FXML
+    private void deleteButton() throws SQLException {
+        if(typeUtilisateur.getText().equals("utilisateur")){
+            Utilisateur user = new Utilisateur(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.supprimerUtilisateur(user);
+            if (status) {
+                setErrorLabel("Utilisateur ajoute");
+            } else {
+                setErrorLabel("Utilisateur non ajoute");
+            }
+        }else if(typeUtilisateur.getText().equals("admin")){
+            Administrateur user = new Administrateur(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.ajouterUtilisateur(user);
+            if (status) {
+                setErrorLabel("Admin ajoute");
+            } else {
+                setErrorLabel("Admin non ajoute");
+            }
+        }else if(typeUtilisateur.getText().equals("technicien")){
+            Technicien user = new Technicien(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
+            boolean status = utilisateurUtile.ajouterUtilisateur(user);
+            if (status) {
+                setErrorLabel("Technicien ajoute");
+            } else {
+                setErrorLabel("Technicien non ajoute");
+            }
+        }else{
+            setErrorLabel("Utilisateur non ajoute, type est incorrect.");
+        }
 
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        showBooks();
+        try {
+            showUsers();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Connection getConnection() {
         Connection conn;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/irrigation","root","");
             return conn;
         }
         catch (Exception e){
@@ -108,37 +207,27 @@ public class GestionUsers implements Initializable {
         }
     }
 
-    public ObservableList<Utilisateur> getBooksList(){
-//        ObservableList<Utilisateur> booksList = FXCollections.observableArrayList();
-//        Connection connection = getConnection();
-//        String query = "SELECT * FROM books ";
-//        Statement st;
-//        ResultSet rs;
-//
-//        try {
-//            st = connection.createStatement();
-//            rs = st.executeQuery(query);
-//            Utilisateur users;
-//            while(rs.next()) {
-//                users = new Utilisateur();
-//                booksList.add(users);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return booksList;
-        return null;
+    public ObservableList<Utilisateur> getUsersList() throws SQLException {
+        ObservableList<Utilisateur> usersList = FXCollections.observableArrayList();
+        LinkedList<Utilisateur> linkedUsers = utilisateurUtile.getAllUsers();
+        for(Utilisateur u : linkedUsers){
+            usersList.add(u);
+        }
+
+        return usersList;
     }
 
     // I had to change ArrayList to ObservableList I didn't find another option to do this but this works :)
-    public void showBooks() {
-        ObservableList<Utilisateur> list = getBooksList();
+    public void showUsers() throws SQLException {
+        ObservableList<Utilisateur> list = getUsersList();
 
-//        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("id"));
-//        titleColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("title"));
-//        authorColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("author"));
-//        yearColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("year"));
-//        pagesColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("pages"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("idUtilisateur"));
+        nomColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("nom"));
+        prenomColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("prenom"));
+        cinColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("cin"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("username"));
+        passwordColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("password"));
+//        typeColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("type"));
 
         TableView.setItems(list);
     }

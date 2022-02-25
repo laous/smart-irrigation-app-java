@@ -28,9 +28,11 @@ public class UtilisateurUtile<T extends Utilisateur> {
         while (rs.next()){
             T user = null;
             if(rs.getString("type").equals("admin")){
-                user = (T) new Administrateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
+                user = (T) new Administrateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
             }else if(rs.getString("type").equals("technicien")){
-                user = (T) new Technicien(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
+                user = (T) new Technicien(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
+            }else{
+                user = (T) new Utilisateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
             }
             users.add(user);
         }
@@ -44,9 +46,9 @@ public class UtilisateurUtile<T extends Utilisateur> {
 
         while(rs.next()){
             if(rs.getString("type").equals("admin")){
-                user = (T) new Administrateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
+                user = (T) new Administrateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
             }else if(rs.getString("type").equals("technicien")){
-                user = (T) new Technicien(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
+                user = (T) new Technicien(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
             }
         }
         return user;
@@ -60,13 +62,13 @@ public class UtilisateurUtile<T extends Utilisateur> {
         String query = "";
 
         if(user instanceof Administrateur){
-            query = "INSERT INTO users (`nom`,`prenom`, `email`, `password`, `cin`, `type`) VALUES " +
+            query = "INSERT INTO users (`nom`,`prenom`, `username`, `password`, `cin`, `type`) VALUES " +
                     "('" + user.getNom() + "','" + user.getPrenom() + "','" + user.getUsername() + "','" + user.getPassword() + "','" + user.getCin() + "','admin')" ;
         }else if(user instanceof Technicien){
-            query = "INSERT INTO users (`nom`,`prenom`, `email`, `password`, `cin`, `type`) VALUES " +
+            query = "INSERT INTO users (`nom`,`prenom`, `username`, `password`, `cin`, `type`) VALUES " +
                     "('" + user.getNom() + "','" + user.getPrenom() + "','" + user.getUsername() + "','" + user.getPassword() + "','" + user.getCin() + "','technicien')" ;
         }else{
-            query = "INSERT INTO users (`nom`,`prenom`, `email`, `password`, `cin`, `type`) VALUES " +
+            query = "INSERT INTO users (`nom`,`prenom`, `username`, `password`, `cin`, `type`) VALUES " +
                     "('" + user.getNom() + "','" + user.getPrenom() + "','" + user.getUsername() + "','" + user.getPassword() + "','" + user.getCin() + "','utilisateur')" ;
         }
         int nbUpdated = stmt.executeUpdate(query);
@@ -93,11 +95,11 @@ public class UtilisateurUtile<T extends Utilisateur> {
         String query = "";
 
         if(user instanceof Administrateur){
-            query = "UPDATE users SET nom='"+ user.getNom()  + "',prenom='" + user.getPrenom() + "',email='" + user.getUsername() + "',password='" + user.getPassword() + "',cin='" + user.getCin() + "' where id like '" + user.getIdUser() +"' and type like 'admin'" ;
+            query = "UPDATE users SET nom='"+ user.getNom()  + "',prenom='" + user.getPrenom() + "',username='" + user.getUsername() + "',password='" + user.getPassword() + "',cin='" + user.getCin() + "' where id like '" + user.getIdUser() +"' and type like 'admin'" ;
         }else if(user instanceof Technicien){
-            query = "UPDATE users SET nom='"+ user.getNom()  + "',prenom='" + user.getPrenom() + "',email='" + user.getUsername() + "',password='" + user.getPassword() + "',cin='" + user.getCin() + "' where id like '" + user.getIdUser() +"' and type like 'technicien'" ;
+            query = "UPDATE users SET nom='"+ user.getNom()  + "',prenom='" + user.getPrenom() + "',username='" + user.getUsername() + "',password='" + user.getPassword() + "',cin='" + user.getCin() + "' where id like '" + user.getIdUser() +"' and type like 'technicien'" ;
         }else{
-            query = "UPDATE users SET nom='"+ user.getNom()  + "',prenom='" + user.getPrenom() + "',email='" + user.getUsername() + "',password='" + user.getPassword() + "',cin='" + user.getCin() + "' where id like '" + user.getIdUser() +"' and type like 'utilisateur'" ;
+            query = "UPDATE users SET nom='"+ user.getNom()  + "',prenom='" + user.getPrenom() + "',username='" + user.getUsername() + "',password='" + user.getPassword() + "',cin='" + user.getCin() + "' where id like '" + user.getIdUser() +"' and type like 'utilisateur'" ;
         }
         int nbUpdated = stmt.executeUpdate(query);
         return nbUpdated > 0;

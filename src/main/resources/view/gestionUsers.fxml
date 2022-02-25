@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionUsers">
     <children>
-        <VBox layoutX="215.0" layoutY="230.0" prefHeight="215.0" prefWidth="88.0" spacing="15.0">
+        <VBox layoutX="41.0" layoutY="234.0" prefHeight="215.0" prefWidth="88.0" spacing="15.0">
             <children>
                 <Label text="ID">
                     <font>
@@ -45,9 +45,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Label text="Type">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             </children>
         </VBox>
-        <VBox layoutX="342.0" layoutY="230.0" prefHeight="203.0" prefWidth="201.0" spacing="10.0">
+        <VBox layoutX="166.0" layoutY="229.0" prefHeight="137.0" prefWidth="210.0" spacing="10.0">
             <children>
                 <TextField fx:id="idUtilisateur" disable="true" />
                 <TextField fx:id="prenomUtilisateur" />
@@ -55,13 +60,14 @@
                 <TextField fx:id="cinUtilisateur" />
                 <TextField fx:id="usernameUtilisateur" />
                 <PasswordField fx:id="passwordUtilisateur" />
+            <TextField fx:id="typeUtilisateur" />
             </children>
         </VBox>
-        <HBox layoutX="259.0" layoutY="455.0" spacing="10.0">
+        <HBox layoutX="412.0" layoutY="334.0" prefHeight="30.0" prefWidth="299.0" spacing="10.0">
             <children>
-                <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Ajouter" />
-                <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Modifier" />
-                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Supprimer" />
+                <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="72.0" text="Ajouter" />
+                <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="83.0" text="Modifier" />
+                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="83.0" text="Supprimer" />
             </children>
         </HBox>
         <TableView fx:id="TableView" prefHeight="215.0" prefWidth="700.0">
@@ -70,9 +76,11 @@
                 <TableColumn fx:id="prenomColumn" prefWidth="93.5999755859375" text="Prenom" />
                 <TableColumn fx:id="nomColumn" prefWidth="111.20002746582031" text="Nom" />
                 <TableColumn fx:id="cinColumn" prefWidth="74.4000244140625" text="CIN" />
-                <TableColumn fx:id="usernameColumn" prefWidth="162.39999389648438" text="Username" />
-                <TableColumn fx:id="passwordColumn" prefWidth="182.4000244140625" text="Password" />
+                <TableColumn fx:id="usernameColumn" prefWidth="98.4000244140625" text="Username" />
+                <TableColumn fx:id="passwordColumn" prefWidth="124.00003051757812" text="Password" />
+            <TableColumn fx:id="typeColumn" prefWidth="124.00003051757812" text="Type" />
             </columns>
         </TableView>
+      <Label fx:id="errorLabel" layoutX="505.0" layoutY="421.0" textFill="RED" />
     </children>
 </AnchorPane>
