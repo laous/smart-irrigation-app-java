@@ -41,6 +41,10 @@ public class Utilisateur {
         return prenom;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
