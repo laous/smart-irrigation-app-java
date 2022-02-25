@@ -2,30 +2,24 @@ package model;
 
 public class Utilisateur {
     int idUser; // l'id primaire de la table user
-    String prenom;
     String nom;
-    String cin;
+    String prenom;
     String email;
+    String password;
+    String cin;
 
     public Utilisateur() {
 
     }
 
-    public Utilisateur(int idUser, String prenom, String nom, String cin, String email) {
+    public Utilisateur(int idUser, String nom, String prenom, String email, String password, String cin) {
         this.idUser = idUser;
-        this.prenom = prenom;
         this.nom = nom;
-        this.cin = cin;
-        this.email = email;
-    }
-
-    public Utilisateur(String prenom, String nom, String cin, String email) {
         this.prenom = prenom;
-        this.nom = nom;
-        this.cin = cin;
         this.email = email;
+        this.password = password;
+        this.cin = cin;
     }
-
 
     public int getIdUser() {
         return idUser;
@@ -69,7 +63,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "User{" +
+        return " " +
                 "idUser=" + idUser +
                 ", prenom='" + prenom + '\'' +
                 ", nom='" + nom + '\'' +
