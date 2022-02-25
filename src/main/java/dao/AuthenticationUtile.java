@@ -16,11 +16,11 @@ public class AuthenticationUtile {
 
     private final Connection con;
 
-    AuthenticationUtile(Connection con){
+    public AuthenticationUtile(Connection con){
         this.con = con;
     }
-    public Utilisateur authentication(String email, String password ) throws SQLException {
-        String query = "SELECT * FROM users WHERE email ='"+email+"' and password='"+password+"'";
+    public Utilisateur authentication(String username, String password ) throws SQLException {
+        String query = "SELECT * FROM users WHERE username like '"+username+"' and password like '"+password+"'";
 
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(query);
