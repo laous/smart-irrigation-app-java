@@ -51,6 +51,7 @@ public class Utilisateur {
     public String getPassword() {
         return password;
     }
+    public String getType(){return type;}
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
