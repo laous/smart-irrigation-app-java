@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Utilisateur;
 
@@ -27,19 +24,22 @@ import java.util.ResourceBundle;
 public class GestionUsers implements Initializable {
 
     @FXML
-    private TextField idField;
+    private TextField idUtilisateur;
 
     @FXML
-    private TextField titleField;
+    private TextField prenomUtilisateur;
 
     @FXML
-    private TextField authorField;
+    private TextField nomUtilisateur;
 
     @FXML
-    private TextField yearField;
+    private TextField cinUtilisateur;
 
     @FXML
-    private TextField pagesField;
+    private TextField usernameUtilisateur;
+
+    @FXML
+    private PasswordField passwordUtilisateur;
 
     @FXML
     private Button insertButton;
@@ -57,48 +57,37 @@ public class GestionUsers implements Initializable {
     private TableColumn<Utilisateur, Integer> idColumn;
 
     @FXML
-    private TableColumn<Utilisateur, String> titleColumn;
+    private TableColumn<Utilisateur, String> prenomColumn;
 
     @FXML
-    private TableColumn<Utilisateur, String> authorColumn;
+    private TableColumn<Utilisateur, String> nomColumn;
 
     @FXML
-    private TableColumn<Utilisateur, Integer> yearColumn;
+    private TableColumn<Utilisateur, String> cinColumn;
 
     @FXML
-    private TableColumn<Utilisateur, Integer> pagesColumn;
+    private TableColumn<Utilisateur, String> usernameColumn;
+
+    @FXML TableColumn<Utilisateur, String> passwordColumn;
 
     @FXML
     private void insertButton() {
-        String query = "insert into 4 values("+idField.getText()+",'"+titleField.getText()+"','"+authorField.getText()+"',"+yearField.getText()+","+pagesField.getText()+")";
-        executeQuery(query);
-        showBooks();
+
     }
 
 
     @FXML
     private void updateButton() {
-        String query = "UPDATE books SET Title='"+titleField.getText()+"',Author='"+authorField.getText()+"',Year="+yearField.getText()+",Pages="+pagesField.getText()+" WHERE ID="+idField.getText()+"";
-        executeQuery(query);
-        showBooks();
+
     }
 
     @FXML
     private void deleteButton() {
-        String query = "DELETE FROM books WHERE ID="+idField.getText()+"";
-        executeQuery(query);
-        showBooks();
+
     }
 
     public void executeQuery(String query) {
-        Connection conn = getConnection();
-        Statement st;
-        try {
-            st = conn.createStatement();
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,7 +97,7 @@ public class GestionUsers implements Initializable {
     public Connection getConnection() {
         Connection conn;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","admin");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
             return conn;
         }
         catch (Exception e){
@@ -118,35 +107,36 @@ public class GestionUsers implements Initializable {
     }
 
     public ObservableList<Utilisateur> getBooksList(){
-        ObservableList<Utilisateur> booksList = FXCollections.observableArrayList();
-        Connection connection = getConnection();
-        String query = "SELECT * FROM books ";
-        Statement st;
-        ResultSet rs;
-
-        try {
-            st = connection.createStatement();
-            rs = st.executeQuery(query);
-            Utilisateur users;
-            while(rs.next()) {
-                users = new Utilisateur();
-                booksList.add(users);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return booksList;
+//        ObservableList<Utilisateur> booksList = FXCollections.observableArrayList();
+//        Connection connection = getConnection();
+//        String query = "SELECT * FROM books ";
+//        Statement st;
+//        ResultSet rs;
+//
+//        try {
+//            st = connection.createStatement();
+//            rs = st.executeQuery(query);
+//            Utilisateur users;
+//            while(rs.next()) {
+//                users = new Utilisateur();
+//                booksList.add(users);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return booksList;
+        return null;
     }
 
     // I had to change ArrayList to ObservableList I didn't find another option to do this but this works :)
     public void showBooks() {
         ObservableList<Utilisateur> list = getBooksList();
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("id"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("title"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("author"));
-        yearColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("year"));
-        pagesColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("pages"));
+//        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("id"));
+//        titleColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("title"));
+//        authorColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("author"));
+//        yearColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("year"));
+//        pagesColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("pages"));
 
         TableView.setItems(list);
     }

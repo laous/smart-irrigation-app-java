@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,59 +13,65 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionUsers">
     <children>
-        <VBox layoutX="237.0" layoutY="244.0" prefHeight="183.0" prefWidth="85.0" spacing="15.0">
+        <VBox layoutX="215.0" layoutY="230.0" prefHeight="215.0" prefWidth="88.0" spacing="15.0">
             <children>
                 <Label text="ID">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Title">
+                <Label text="Prenom">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Author">
+                <Label text="Nom">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Year">
+                <Label text="CIN">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Pages">
+                <Label text="Username">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
+            <Label text="Password">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             </children>
         </VBox>
-        <VBox layoutX="373.0" layoutY="244.0" prefHeight="215.0" prefWidth="219.0" spacing="10.0">
+        <VBox layoutX="342.0" layoutY="230.0" prefHeight="203.0" prefWidth="201.0" spacing="10.0">
             <children>
-                <TextField fx:id="idField" />
-                <TextField fx:id="titleField" />
-                <TextField fx:id="authorField" />
-                <TextField fx:id="yearField" />
-                <TextField fx:id="pagesField" />
-
+                <TextField fx:id="idUtilisateur" disable="true" />
+                <TextField fx:id="prenomUtilisateur" />
+                <TextField fx:id="nomUtilisateur" />
+                <TextField fx:id="cinUtilisateur" />
+                <TextField fx:id="usernameUtilisateur" />
+                <PasswordField fx:id="passwordUtilisateur" />
             </children>
         </VBox>
-        <HBox layoutX="273.0" layoutY="459.0" spacing="10.0">
+        <HBox layoutX="259.0" layoutY="455.0" spacing="10.0">
             <children>
-                <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
-                <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
-                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
+                <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Ajouter" />
+                <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Modifier" />
+                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Supprimer" />
             </children>
         </HBox>
-        <TableView fx:id="TableView" layoutX="1.0" layoutY="1.0" prefHeight="215.0" prefWidth="700.0">
+        <TableView fx:id="TableView" prefHeight="215.0" prefWidth="700.0">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="73.59997248649597" text="ID" />
-                <TableColumn fx:id="titleColumn" prefWidth="132.80001831054688" text="Title" />
-                <TableColumn fx:id="authorColumn" prefWidth="133.6000518798828" text="Author" />
-                <TableColumn fx:id="yearColumn" prefWidth="155.20001220703125" text="Year" />
-                <TableColumn fx:id="pagesColumn" prefWidth="203.20001220703125" text="Pages" />
+                <TableColumn fx:id="prenomColumn" prefWidth="93.5999755859375" text="Prenom" />
+                <TableColumn fx:id="nomColumn" prefWidth="111.20002746582031" text="Nom" />
+                <TableColumn fx:id="cinColumn" prefWidth="74.4000244140625" text="CIN" />
+                <TableColumn fx:id="usernameColumn" prefWidth="162.39999389648438" text="Username" />
+                <TableColumn fx:id="passwordColumn" prefWidth="182.4000244140625" text="Password" />
             </columns>
         </TableView>
     </children>
