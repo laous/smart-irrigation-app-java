@@ -7,7 +7,7 @@ public class Utilisateur {
     String username;
     String password;
     String cin;
-
+    String type="utilisateur";
     public Utilisateur() {
 
     }

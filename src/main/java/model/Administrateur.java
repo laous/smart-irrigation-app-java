@@ -1,6 +1,7 @@
 package model;
 
 public class Administrateur extends Utilisateur{
+    String type="admin";
     public Administrateur() {
 
     }
