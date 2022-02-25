@@ -37,9 +37,9 @@ public class UtilisateurUtile<T extends Utilisateur> {
         return  users;
     }
 
-    public T getUserById(int id) throws SQLException {
+    public T getUserByCIN(String cin) throws SQLException {
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("select * from users where id like '" + id + "'");
+        ResultSet rs = stmt.executeQuery("select * from users where cin like '" + cin + "'");
         T user = null;
 
         while(rs.next()){
@@ -53,6 +53,9 @@ public class UtilisateurUtile<T extends Utilisateur> {
     }
 
     public boolean ajouterUtilisateur(T user) throws SQLException {
+        if(getUserByCIN(user.getCin()) == null){
+            return false;
+        }
         Statement stmt = con.createStatement();
         String query = "";
 
