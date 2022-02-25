@@ -1,6 +1,7 @@
 package controller;
 
 
+import dao.UtilisateurUtile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +23,8 @@ import java.util.ResourceBundle;
 
 
 public class GestionUsers implements Initializable {
+
+    private UtilisateurUtile<Utilisateur> utilisateurUtile;
 
     @FXML
     private TextField idUtilisateur;
@@ -72,6 +75,7 @@ public class GestionUsers implements Initializable {
 
     @FXML
     private void insertButton() {
+        Utilisateur user = new Utilisateur(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),nomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
 
     }
 
@@ -86,9 +90,7 @@ public class GestionUsers implements Initializable {
 
     }
 
-    public void executeQuery(String query) {
 
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showBooks();
