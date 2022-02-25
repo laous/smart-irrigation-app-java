@@ -73,6 +73,10 @@ public class CapteurUtile<T extends Capteur> {
 
     public boolean ajouterCapteur(T c) throws SQLException {
 
+        if(getCapteurByCode(c.getCode()) == null){
+            return false;
+        }
+
         Statement stmt = con.createStatement();
         String query = "";
 
@@ -103,6 +107,21 @@ public class CapteurUtile<T extends Capteur> {
             query = "DELETE FROM capteurs where code=" + c.getCode() + " and type like 'eau'";
         }
 
+        int nbUpdated = stmt.executeUpdate(query);
+        return nbUpdated > 0;
+    }
+
+    public boolean majCapteur(T c) throws SQLException{
+        Statement stmt = con.createStatement();
+        String query = "";
+
+        if (c instanceof CapteurHumidite) {
+            query = "UPDATE capteurs SET etat='"+c.getEtat()+"' where code like '"+c.getCode()+"' and type like 'humidite'";
+        } else if (c instanceof CapteurTemperature) {
+            query = "UPDATE capteurs SET etat='"+c.getEtat()+"' where code like '"+c.getCode()+"' and type like 'temperature'";
+        } else if (c instanceof CapteurNiveauEau) {
+            query = "UPDATE capteurs SET etat='"+c.getEtat()+"' where code like '"+c.getCode()+"' and type like 'eau'";
+        }
         int nbUpdated = stmt.executeUpdate(query);
         return nbUpdated > 0;
     }
