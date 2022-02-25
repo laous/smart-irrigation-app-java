@@ -36,13 +36,13 @@ public class CapteurUtile<T extends Capteur> {
 
         while (rs.next()) {
             if (rs.getString("type").equals("humidite")) {
-                c = (T) new CapteurHumidite(rs.getString("etat"), rs.getString("zone"), rs.getFloat("valeur"));
+                c = (T) new CapteurHumidite(rs.getString("etat"), rs.getString("code"), rs.getFloat("valeur"));
 
             } else if (rs.getString("type").equals("temperature")) {
-                c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("zone"), rs.getFloat("valeur"));
+                c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("code"), rs.getFloat("valeur"));
 
             }else if (rs.getString("type").equals("eau")) {
-                c = (T) new CapteurNiveauEau(rs.getString("etat"), rs.getString("zone"), rs.getFloat("valeur"));
+                c = (T) new CapteurNiveauEau(rs.getString("etat"), rs.getString("code"), rs.getFloat("valeur"));
             }
         }
         return c;
@@ -58,13 +58,13 @@ public class CapteurUtile<T extends Capteur> {
         while (rs.next()) {
             T c = null;
             if (rs.getString("type").equals("humidite")) {
-                c = (T) new CapteurHumidite(rs.getString("etat"), rs.getString("zone"), rs.getFloat("valeur"));
+                c = (T) new CapteurHumidite(rs.getString("etat"), rs.getString("code"), rs.getFloat("valeur"));
 
             } else if (rs.getString("type").equals("temperature")) {
-                c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("zone"), rs.getFloat("valeur"));
+                c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("code"), rs.getFloat("valeur"));
 
             } else if (rs.getString("type").equals("eau")) {
-                c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("zone"), rs.getFloat("valeur"));
+                c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("code"), rs.getFloat("valeur"));
             }
             capteurs.add(c);
         }
