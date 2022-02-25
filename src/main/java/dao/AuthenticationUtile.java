@@ -29,6 +29,8 @@ public class AuthenticationUtile {
                 return new Technicien(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
             }else  if (rs.getString("type").equals("admin")){
                 return new Administrateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
+            }else{
+                return  new Utilisateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
             }
         }
         return null;
