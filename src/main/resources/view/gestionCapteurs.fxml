@@ -33,9 +33,9 @@
         </VBox>
         <VBox layoutX="330.0" layoutY="277.0" prefHeight="129.0" prefWidth="234.0" spacing="10.0">
             <children>
-                <TextField fx:id="idCapteur" disable="true" />
-                <TextField fx:id="nomCapteur" />
+                <TextField fx:id="codeCapteur" />
                 <TextField fx:id="zoneCapteur" />
+                <TextField fx:id="etatCapteur" />
 
             </children>
         </VBox>
@@ -48,9 +48,9 @@
         </HBox>
         <TableView fx:id="TableView" prefHeight="250.0" prefWidth="700.0">
             <columns>
-                <TableColumn fx:id="idColumn" prefWidth="73.59997248649597" text="ID" />
-                <TableColumn fx:id="nomColumn" prefWidth="132.80001831054688" text="Nom" />
+                <TableColumn fx:id="codeColumn" prefWidth="73.59997248649597" text="Code" />
                 <TableColumn fx:id="zoneColumn" prefWidth="133.6000518798828" text="Zone" />
+                <TableColumn fx:id="etatColumn" prefWidth="133.6000518798828" text="Etat" />
             </columns>
         </TableView>
     </children>

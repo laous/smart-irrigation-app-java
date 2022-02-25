@@ -27,10 +27,10 @@ import java.util.ResourceBundle;
 public class GestionCapteurs implements Initializable {
 
     @FXML
-    private TextField idCapteur;
+    private TextField codeCapteur;
 
     @FXML
-    private TextField nomCapteur;
+    private TextField etatCapteur;
 
     @FXML
     private TextField zoneCapteur;
@@ -48,10 +48,10 @@ public class GestionCapteurs implements Initializable {
     private TableView<Utilisateur> TableView;
 
     @FXML
-    private TableColumn<Utilisateur, Integer> idColumn;
+    private TableColumn<Utilisateur, Integer> codeColumn;
 
     @FXML
-    private TableColumn<Utilisateur, String> nomColumn;
+    private TableColumn<Utilisateur, String> etatColumn;
 
     @FXML
     private TableColumn<Utilisateur, String> zoneColumn;
@@ -131,9 +131,9 @@ public class GestionCapteurs implements Initializable {
     public void showBooks() {
         ObservableList<Utilisateur> list = getBooksList();
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("id"));
-        nomColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("title"));
-        zoneColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("author"));
+//        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("id"));
+//        nomColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("title"));
+//        zoneColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("author"));
 
         TableView.setItems(list);
     }
