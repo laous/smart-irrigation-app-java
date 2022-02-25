@@ -4,6 +4,7 @@ package controller;
 import dao.UtilisateurUtile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Administrateur;
 import model.Technicien;
 import model.Utilisateur;
+import org.w3c.dom.events.MouseEvent;
 
 import java.net.URL;
 import java.sql.*;
@@ -93,6 +95,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.ajouterUtilisateur(user);
             if (status) {
                 setErrorLabel("Utilisateur ajoute");
+                showUsers();
             } else {
                 setErrorLabel("Utilisateur non ajoute");
             }
@@ -101,6 +104,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.ajouterUtilisateur(user);
             if (status) {
                 setErrorLabel("Admin ajoute");
+                showUsers();
             } else {
                 setErrorLabel("Admin non ajoute");
             }
@@ -109,6 +113,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.ajouterUtilisateur(user);
             if (status) {
                 setErrorLabel("Technicien ajoute");
+                showUsers();
             } else {
                 setErrorLabel("Technicien non ajoute");
             }
@@ -129,6 +134,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.majUtilisateur(user);
             if (status) {
                 setErrorLabel("Utilisateur modifie");
+                showUsers();
             } else {
                 setErrorLabel("Utilisateur non modifie");
             }
@@ -137,6 +143,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.majUtilisateur(user);
             if (status) {
                 setErrorLabel("Admin modifie");
+                showUsers();
             } else {
                 setErrorLabel("Admin non modifie");
             }
@@ -145,6 +152,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.majUtilisateur(user);
             if (status) {
                 setErrorLabel("Technicien modifie");
+                showUsers();
             } else {
                 setErrorLabel("Technicien non modifie");
             }
@@ -160,6 +168,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.supprimerUtilisateur(user);
             if (status) {
                 setErrorLabel("Utilisateur ajoute");
+                showUsers();
             } else {
                 setErrorLabel("Utilisateur non ajoute");
             }
@@ -168,6 +177,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.ajouterUtilisateur(user);
             if (status) {
                 setErrorLabel("Admin ajoute");
+                showUsers();
             } else {
                 setErrorLabel("Admin non ajoute");
             }
@@ -176,6 +186,7 @@ public class GestionUsers implements Initializable {
             boolean status = utilisateurUtile.ajouterUtilisateur(user);
             if (status) {
                 setErrorLabel("Technicien ajoute");
+                showUsers();
             } else {
                 setErrorLabel("Technicien non ajoute");
             }
@@ -217,19 +228,35 @@ public class GestionUsers implements Initializable {
         return usersList;
     }
 
-    // I had to change ArrayList to ObservableList I didn't find another option to do this but this works :)
+
     public void showUsers() throws SQLException {
         ObservableList<Utilisateur> list = getUsersList();
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("idUtilisateur"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("idUser"));
         nomColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("nom"));
         prenomColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("prenom"));
         cinColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("cin"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("username"));
         passwordColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("password"));
-//        typeColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("type"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("type"));
 
         TableView.setItems(list);
     }
 
+    @FXML
+    public void handleMouseAction(MouseEvent ev){
+
+
+    }
+
+    public void handleMouseAction(javafx.scene.input.MouseEvent mouseEvent) {
+        Utilisateur user = TableView.getSelectionModel().getSelectedItem();
+        idUtilisateur.setText(String.valueOf(user.getIdUser()));
+        nomUtilisateur.setText(user.getNom());
+        prenomUtilisateur.setText(user.getPrenom());
+        cinUtilisateur.setText(user.getCin());
+        usernameUtilisateur.setText(user.getUsername());
+        typeUtilisateur.setText(user.getType());
+        passwordUtilisateur.setText(user.getPassword());
+    }
 }

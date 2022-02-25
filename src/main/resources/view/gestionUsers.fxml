@@ -70,7 +70,7 @@
                 <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="83.0" text="Supprimer" />
             </children>
         </HBox>
-        <TableView fx:id="TableView" prefHeight="215.0" prefWidth="700.0">
+        <TableView fx:id="TableView" onMouseClicked="#handleMouseAction" prefHeight="215.0" prefWidth="700.0">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="73.59997248649597" text="ID" />
                 <TableColumn fx:id="prenomColumn" prefWidth="93.5999755859375" text="Prenom" />
@@ -81,6 +81,6 @@
             <TableColumn fx:id="typeColumn" prefWidth="124.00003051757812" text="Type" />
             </columns>
         </TableView>
-      <Label fx:id="errorLabel" layoutX="505.0" layoutY="421.0" textFill="RED" />
+      <Label fx:id="errorLabel" layoutX="412.0" layoutY="420.0" prefHeight="53.0" prefWidth="243.0" textFill="RED" />
     </children>
 </AnchorPane>

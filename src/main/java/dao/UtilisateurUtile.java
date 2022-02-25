@@ -55,7 +55,7 @@ public class UtilisateurUtile<T extends Utilisateur> {
     }
 
     public boolean ajouterUtilisateur(T user) throws SQLException {
-        if(getUserByCIN(user.getCin()) == null){
+        if(getUserByCIN(user.getCin()) != null){
             return false;
         }
         Statement stmt = con.createStatement();

@@ -16,4 +16,7 @@ module com.example.irrigationapp {
     exports view;
     exports controller;
     opens controller to javafx.fxml;
+    exports model;
+    opens model to javafx.fxml;
+
 }
