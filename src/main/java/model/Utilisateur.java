@@ -19,6 +19,11 @@ public class Utilisateur {
         this.username = username;
         this.password = password;
         this.cin = cin;
+        if(this instanceof Administrateur){
+            this.type = "admin";
+        }else if(this instanceof Technicien){
+            this.type = "technicien";
+        }
     }
     public Utilisateur( String nom, String prenom, String username, String password, String cin) {
         this.nom = nom;
@@ -26,6 +31,11 @@ public class Utilisateur {
         this.username = username;
         this.password = password;
         this.cin = cin;
+        if(this instanceof Administrateur){
+            this.type = "admin";
+        }else if(this instanceof Technicien){
+            this.type = "technicien";
+        }
     }
 
     public int getIdUser() {
