@@ -12,59 +12,45 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionCapteurs">
     <children>
-        <VBox layoutX="237.0" layoutY="244.0" prefHeight="183.0" prefWidth="85.0" spacing="15.0">
+        <VBox layoutX="180.0" layoutY="277.0" prefHeight="183.0" prefWidth="91.0" spacing="15.0">
             <children>
                 <Label text="ID">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Title">
+                <Label text="Nom">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label text="Author">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Label>
-                <Label text="Year">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Label>
-                <Label text="Pages">
+                <Label text="Zone">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
             </children>
         </VBox>
-        <VBox layoutX="373.0" layoutY="244.0" prefHeight="215.0" prefWidth="219.0" spacing="10.0">
+        <VBox layoutX="330.0" layoutY="277.0" prefHeight="129.0" prefWidth="234.0" spacing="10.0">
             <children>
-                <TextField fx:id="idField" />
-                <TextField fx:id="titleField" />
-                <TextField fx:id="authorField" />
-                <TextField fx:id="yearField" />
-                <TextField fx:id="pagesField" />
+                <TextField fx:id="idCapteur" disable="true" />
+                <TextField fx:id="nomCapteur" />
+                <TextField fx:id="zoneCapteur" />
 
             </children>
         </VBox>
-        <HBox layoutX="273.0" layoutY="459.0" spacing="10.0">
+        <HBox layoutX="272.0" layoutY="407.0" spacing="10.0">
             <children>
                 <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
                 <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
                 <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
             </children>
         </HBox>
-        <TableView fx:id="TableView" layoutX="1.0" layoutY="1.0" prefHeight="215.0" prefWidth="700.0">
+        <TableView fx:id="TableView" prefHeight="250.0" prefWidth="700.0">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="73.59997248649597" text="ID" />
-                <TableColumn fx:id="titleColumn" prefWidth="132.80001831054688" text="Title" />
-                <TableColumn fx:id="authorColumn" prefWidth="133.6000518798828" text="Author" />
-                <TableColumn fx:id="yearColumn" prefWidth="155.20001220703125" text="Year" />
-                <TableColumn fx:id="pagesColumn" prefWidth="203.20001220703125" text="Pages" />
+                <TableColumn fx:id="nomColumn" prefWidth="132.80001831054688" text="Nom" />
+                <TableColumn fx:id="zoneColumn" prefWidth="133.6000518798828" text="Zone" />
             </columns>
         </TableView>
     </children>

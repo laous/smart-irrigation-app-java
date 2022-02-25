@@ -27,19 +27,13 @@ import java.util.ResourceBundle;
 public class GestionCapteurs implements Initializable {
 
     @FXML
-    private TextField idField;
+    private TextField idCapteur;
 
     @FXML
-    private TextField titleField;
+    private TextField nomCapteur;
 
     @FXML
-    private TextField authorField;
-
-    @FXML
-    private TextField yearField;
-
-    @FXML
-    private TextField pagesField;
+    private TextField zoneCapteur;
 
     @FXML
     private Button insertButton;
@@ -57,48 +51,41 @@ public class GestionCapteurs implements Initializable {
     private TableColumn<Utilisateur, Integer> idColumn;
 
     @FXML
-    private TableColumn<Utilisateur, String> titleColumn;
+    private TableColumn<Utilisateur, String> nomColumn;
 
     @FXML
-    private TableColumn<Utilisateur, String> authorColumn;
-
-    @FXML
-    private TableColumn<Utilisateur, Integer> yearColumn;
-
-    @FXML
-    private TableColumn<Utilisateur, Integer> pagesColumn;
+    private TableColumn<Utilisateur, String> zoneColumn;
 
     @FXML
     private void insertButton() {
-        String query = "insert into 4 values("+idField.getText()+",'"+titleField.getText()+"','"+authorField.getText()+"',"+yearField.getText()+","+pagesField.getText()+")";
-        executeQuery(query);
-        showBooks();
+//        String query = "insert into 4 values("+idCapteur.getText()+",'"+nomCapteur.getText()+"','"+zoneCapteur.getText()+"'";        executeQuery(query);
+//        showBooks();
     }
 
 
     @FXML
     private void updateButton() {
-        String query = "UPDATE books SET Title='"+titleField.getText()+"',Author='"+authorField.getText()+"',Year="+yearField.getText()+",Pages="+pagesField.getText()+" WHERE ID="+idField.getText()+"";
-        executeQuery(query);
-        showBooks();
+//        String query = "UPDATE books SET Title='"+nom.getText()+"',Author='"+authorField.getText()+"',Year="+yearField.getText()+",Pages="+pagesField.getText()+" WHERE ID="+idCapteur.getText()+"";
+//        executeQuery(query);
+//        showBooks();
     }
 
     @FXML
     private void deleteButton() {
-        String query = "DELETE FROM books WHERE ID="+idField.getText()+"";
-        executeQuery(query);
-        showBooks();
+//        String query = "DELETE FROM books WHERE ID="+idCapteur.getText()+"";
+//        executeQuery(query);
+//        showBooks();
     }
 
     public void executeQuery(String query) {
-        Connection conn = getConnection();
-        Statement st;
-        try {
-            st = conn.createStatement();
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        Connection conn = getConnection();
+//        Statement st;
+//        try {
+//            st = conn.createStatement();
+//            st.executeUpdate(query);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -107,35 +94,37 @@ public class GestionCapteurs implements Initializable {
 
     public Connection getConnection() {
         Connection conn;
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","admin");
-            return conn;
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+//        try {
+//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","admin");
+//            return conn;
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
+        return null;
     }
 
     public ObservableList<Utilisateur> getBooksList(){
-        ObservableList<Utilisateur> booksList = FXCollections.observableArrayList();
-        Connection connection = getConnection();
-        String query = "SELECT * FROM books ";
-        Statement st;
-        ResultSet rs;
-
-        try {
-            st = connection.createStatement();
-            rs = st.executeQuery(query);
-            Utilisateur users;
-            while(rs.next()) {
-                users = new Utilisateur();
-                booksList.add(users);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return booksList;
+//        ObservableList<Utilisateur> booksList = FXCollections.observableArrayList();
+//        Connection connection = getConnection();
+//        String query = "SELECT * FROM books ";
+//        Statement st;
+//        ResultSet rs;
+//
+//        try {
+//            st = connection.createStatement();
+//            rs = st.executeQuery(query);
+//            Utilisateur users;
+//            while(rs.next()) {
+//                users = new Utilisateur();
+//                booksList.add(users);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return booksList;
+        return null;
     }
 
     // I had to change ArrayList to ObservableList I didn't find another option to do this but this works :)
@@ -143,10 +132,8 @@ public class GestionCapteurs implements Initializable {
         ObservableList<Utilisateur> list = getBooksList();
 
         idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("id"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("title"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("author"));
-        yearColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("year"));
-        pagesColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("pages"));
+        nomColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("title"));
+        zoneColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("author"));
 
         TableView.setItems(list);
     }
