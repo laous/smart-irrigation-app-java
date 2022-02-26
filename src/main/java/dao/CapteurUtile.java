@@ -28,7 +28,7 @@ public class CapteurUtile<T extends Capteur> {
         this.con = con;
     }
 
-    public T getCapteurByZone(int zone) throws SQLException {
+    public T getCapteurByZone(String zone) throws SQLException {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from capteurs where zone like '" + zone + "'");
         T c = null;
