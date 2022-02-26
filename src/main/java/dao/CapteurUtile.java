@@ -133,4 +133,17 @@ public class CapteurUtile<T extends Capteur> {
         return nbUpdated > 0;
     }
 
+    public boolean updateCapteurValue(T c) throws SQLException {
+        Statement stmt = con.createStatement();
+        String query = "";
+
+        if (c instanceof CapteurHumidite) {
+            query = "UPDATE capteurs SET valeur='" + ((CapteurHumidite) c).getHumidite() +"' where code like '" + c.getCode() + "' and type like 'humidite'";
+        } else if (c instanceof CapteurTemperature) {
+            query = "UPDATE capteurs SET valeur='" + ((CapteurTemperature) c).getTemperature() +"' where code like '" + c.getCode() + "' and type like 'temperature'";
+        }
+        int nbUpdated = stmt.executeUpdate(query);
+        return nbUpdated > 0;
+    }
+
 }
