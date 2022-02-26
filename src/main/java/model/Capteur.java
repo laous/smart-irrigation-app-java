@@ -28,6 +28,7 @@ public abstract class Capteur {
 
     Capteur(String code, String etat, String zone) {
         this.code = code;
+        this.zone = zone;
         this.etat = etat;
         if(this instanceof CapteurTemperature){
             this.type="temperature";
