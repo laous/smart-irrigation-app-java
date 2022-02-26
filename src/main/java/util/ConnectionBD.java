@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionBD {
 
-    static Connection con;
+    public static Connection con;
 
     static {
         try {
