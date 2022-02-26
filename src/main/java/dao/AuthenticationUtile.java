@@ -26,11 +26,11 @@ public class AuthenticationUtile {
         ResultSet rs = stmt.executeQuery(query);
         while(rs.next()){
             if (rs.getString("type").equals("technicien")) {  // Type technicien
-                return new Technicien(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
+                return new Technicien(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
             }else  if (rs.getString("type").equals("admin")){
-                return new Administrateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
+                return new Administrateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
             }else{
-                return  new Utilisateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getString("cin"));
+                return  new Utilisateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
             }
         }
         return null;
