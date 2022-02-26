@@ -1,14 +1,18 @@
 package controller;
 
 import dao.CapteurUtile;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import model.Capteur;
 import model.CapteurHumidite;
 import model.CapteurTemperature;
+import view.HelloApplication;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,9 +21,12 @@ public class Dashboard {
 
 
     public Pane zonePane1;
+    public Button backBtn;
+    HelloApplication m = new HelloApplication();
 
     public Dashboard() throws SQLException {
     }
+
 
 
 
@@ -65,6 +72,18 @@ public class Dashboard {
     Label humiditeLabel1;
     @FXML
     Label reservoirLabel1;
+    @FXML
+    Label temperatureLabel2;
+    @FXML
+    Label humiditeLabel2;
+    @FXML
+    Label reservoirLabel2;
+    @FXML
+    Label temperatureLabel3;
+    @FXML
+    Label humiditeLabel3;
+    @FXML
+    Label reservoirLabel3;
 
 
     public void handleCLick(MouseEvent mouseEvent) throws SQLException {
@@ -75,13 +94,40 @@ public class Dashboard {
     public void showValues() throws SQLException {
         /* Zone 1 */
         // Temperature
-        CapteurTemperature ct =(CapteurTemperature) capteurUtile.getCapteurByCode(zone1.getCodeTemperature());
-        Float t1 = ct.getTemperature();
+        CapteurTemperature ct1 =(CapteurTemperature) capteurUtile.getCapteurByCode(zone1.getCodeTemperature());
+        Float t1 = ct1.getTemperature();
         temperatureLabel1.setText("Temperature = " + t1);
         // Humidite
-        CapteurHumidite ch =(CapteurHumidite) capteurUtile.getCapteurByCode(zone1.getCodeHumidite());
-        Float h1 = ch.getHumidite();
+        CapteurHumidite ch1 =(CapteurHumidite) capteurUtile.getCapteurByCode(zone1.getCodeHumidite());
+        Float h1 = ch1.getHumidite();
         humiditeLabel1.setText("Humidite = " + h1);
+        if(h1<15){
+            // irrigation lance
+        }else{
+            // irrigation stope
+        }
+        zonePane1.setStyle("-fx-background-color:rgba(255, 255, 255, 0.87);");
+
+        /* Zone 2 */
+        // Temperature
+        CapteurTemperature ct2 =(CapteurTemperature) capteurUtile.getCapteurByCode(zone2.getCodeTemperature());
+        Float t2 = ct2.getTemperature();
+        temperatureLabel2.setText("Temperature = " + t2);
+        // Humidite
+        CapteurHumidite ch2 =(CapteurHumidite) capteurUtile.getCapteurByCode(zone2.getCodeHumidite());
+        Float h2 = ch2.getHumidite();
+        humiditeLabel2.setText("Humidite = " + h2);
+        zonePane1.setStyle("-fx-background-color:rgba(255, 255, 255, 0.87);");
+
+        /* Zone 3 */
+        // Temperature
+        CapteurTemperature ct3 =(CapteurTemperature) capteurUtile.getCapteurByCode(zone3.getCodeTemperature());
+        Float t3 = ct3.getTemperature();
+        temperatureLabel3.setText("Temperature = " + t3);
+        // Humidite
+        CapteurHumidite ch3 =(CapteurHumidite) capteurUtile.getCapteurByCode(zone3.getCodeHumidite());
+        Float h3 = ch3.getHumidite();
+        humiditeLabel3.setText("Humidite = " + h3);
         zonePane1.setStyle("-fx-background-color:rgba(255, 255, 255, 0.87);");
     }
 
@@ -98,7 +144,9 @@ public class Dashboard {
         }
     }
 
-
+    public void goBack(ActionEvent actionEvent) throws IOException {
+        m.changeScene("login.fxml");
+    }
 
 
 
