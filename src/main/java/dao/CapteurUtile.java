@@ -17,7 +17,6 @@ import java.util.LinkedList;
 
 import model.Capteur;
 import model.CapteurHumidite;
-import model.CapteurNiveauEau;
 import model.CapteurTemperature;
 
 
@@ -37,15 +36,14 @@ public class CapteurUtile<T extends Capteur> {
         while (rs.next()) {
             if (rs.getString("type").equals("humidite")) {
                 c = (T) new CapteurHumidite(rs.getString("etat"), rs.getString("code"), rs.getInt("zone"), rs.getFloat("valeur"));
+                return c;
 
             } else if (rs.getString("type").equals("temperature")) {
                 c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("code"), rs.getInt("zone"), rs.getFloat("valeur"));
-
-            } else if (rs.getString("type").equals("eau")) {
-                c = (T) new CapteurNiveauEau(rs.getString("etat"), rs.getString("code"), rs.getInt("zone"), rs.getFloat("valeur"));
+                return c;
             }
         }
-        return c;
+        return null;
     }
 
     public T getCapteurByCode(String code) throws SQLException {
@@ -56,15 +54,13 @@ public class CapteurUtile<T extends Capteur> {
         while (rs.next()) {
             if (rs.getString("type").equals("humidite")) {
                 c = (T) new CapteurHumidite(rs.getString("etat"), rs.getString("code"), rs.getInt("zone"), rs.getFloat("valeur"));
-
+                return c;
             } else if (rs.getString("type").equals("temperature")) {
                 c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("code"), rs.getInt("zone"), rs.getFloat("valeur"));
-
-            } else if (rs.getString("type").equals("eau")) {
-                c = (T) new CapteurNiveauEau(rs.getString("etat"), rs.getString("code"), rs.getInt("zone"), rs.getFloat("valeur"));
+                return c;
             }
         }
-        return c;
+        return null;
     }
 
     public LinkedList<T> getAllCapteurs() throws SQLException {
@@ -82,8 +78,6 @@ public class CapteurUtile<T extends Capteur> {
             } else if (rs.getString("type").equals("temperature")) {
                 c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("code"), rs.getInt("zone"), rs.getFloat("valeur"));
 
-            } else if (rs.getString("type").equals("eau")) {
-                c = (T) new CapteurTemperature(rs.getString("etat"), rs.getString("code"), rs.getInt("zone"), rs.getFloat("valeur"));
             }
             capteurs.add(c);
         }
@@ -92,7 +86,7 @@ public class CapteurUtile<T extends Capteur> {
 
     public boolean ajouterCapteur(T c) throws SQLException {
 
-        if (getCapteurByCode(c.getCode()) == null) {
+        if (getCapteurByCode(c.getCode()) != null) {
             return false;
         }
 
@@ -100,14 +94,12 @@ public class CapteurUtile<T extends Capteur> {
         String query = "";
 
         if (c instanceof CapteurHumidite) {
-            query = "INSERT INTO capteurs (`code`,`etat`, `valeur`, `type`) VALUES" +
-                    "(" + c.getEtat() + "','" + c.getCode() + "','" + ((CapteurHumidite) c).getHumidite() + "','humidite')";
+            System.out.println("here");
+            query = "INSERT INTO capteurs (`code`,`etat`, `zone`, `type`) VALUES" +
+                    "('" + c.getCode() + "','" + c.getEtat() + "','" + c.getZone() + "','humidite')";
         } else if (c instanceof CapteurTemperature) {
-            query = "INSERT INTO capteurs (`code`,`etat`, `valeur`,`type`) VALUES" +
-                    "(" + c.getEtat() + "','" + c.getCode() + "','" + ((CapteurTemperature) c).getTemperature() + "','temperature')";
-        } else if (c instanceof CapteurNiveauEau) {
-            query = "INSERT INTO capteurs (`etat`,`code`, `valeur`,`type`) VALUES" +
-                    "(" + c.getEtat() + "','" + c.getCode() + "','" + ((CapteurNiveauEau) c).getNiveau() + "', 'eau')";
+            query = "INSERT INTO capteurs (`code`,`etat`, `zone`,`type`) VALUES" +
+                    "('" + c.getCode() + "','" + c.getEtat() + "','" + c.getZone()+ "','temperature')";
         }
 
         int nbUpdated = stmt.executeUpdate(query);
@@ -121,9 +113,7 @@ public class CapteurUtile<T extends Capteur> {
         if (c instanceof CapteurHumidite) {
             query = "DELETE FROM capteurs where code like '" + c.getCode() + "' and type like 'humidite'";
         } else if (c instanceof CapteurTemperature) {
-            query = "DELETE FROM capteurs where code=" + c.getCode() + " and type like 'temperature'";
-        } else if (c instanceof CapteurNiveauEau) {
-            query = "DELETE FROM capteurs where code=" + c.getCode() + " and type like 'eau'";
+            query = "DELETE FROM capteurs where code like '" + c.getCode() + "' and type like 'temperature'";
         }
 
         int nbUpdated = stmt.executeUpdate(query);
@@ -135,11 +125,9 @@ public class CapteurUtile<T extends Capteur> {
         String query = "";
 
         if (c instanceof CapteurHumidite) {
-            query = "UPDATE capteurs SET etat='" + c.getEtat() + "' where code like '" + c.getCode() + "' and type like 'humidite'";
+            query = "UPDATE capteurs SET etat='" + c.getEtat() + "', zone='"+c.getZone()+"'  where code like '" + c.getCode() + "' and type like 'humidite'";
         } else if (c instanceof CapteurTemperature) {
-            query = "UPDATE capteurs SET etat='" + c.getEtat() + "' where code like '" + c.getCode() + "' and type like 'temperature'";
-        } else if (c instanceof CapteurNiveauEau) {
-            query = "UPDATE capteurs SET etat='" + c.getEtat() + "' where code like '" + c.getCode() + "' and type like 'eau'";
+            query = "UPDATE capteurs SET etat='" + c.getEtat() + "', zone='"+c.getZone()+"' where code like '" + c.getCode() + "' and type like 'temperature'";
         }
         int nbUpdated = stmt.executeUpdate(query);
         return nbUpdated > 0;

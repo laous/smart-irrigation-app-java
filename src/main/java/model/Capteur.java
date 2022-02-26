@@ -8,10 +8,32 @@ public abstract class Capteur {
     private String code;
     private String etat;
     private int zone;
+    protected String type;
 
-    Capteur(String code,String etat,int zone) {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getZone() {
+        return zone;
+    }
+
+    public void setZone(int zone) {
+        this.zone = zone;
+    }
+
+    Capteur(String code, String etat, int zone) {
         this.code = code;
         this.etat = etat;
+        if(this instanceof CapteurTemperature){
+            this.type="temperature";
+        }else if(this instanceof  CapteurHumidite){
+            this.type="humidite";
+        }
     }
 
     public String getEtat() {
