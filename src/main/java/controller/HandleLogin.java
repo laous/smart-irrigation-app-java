@@ -4,6 +4,8 @@ import dao.AuthenticationUtile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.Administrateur;
+import model.Technicien;
 import model.Utilisateur;
 import view.HelloApplication;
 
@@ -26,6 +28,8 @@ public class HandleLogin {
     private TextField username ;
     @FXML
     private PasswordField password;
+    @FXML
+    private ToggleGroup accountType;
 
     public Connection getConnection() {
         Connection conn;
@@ -46,12 +50,28 @@ public class HandleLogin {
 
         Utilisateur response = authDao.authentication(user, pw);
 
+        RadioButton selectedRadioButton = (RadioButton) accountType.getSelectedToggle();
+        String typeValue = selectedRadioButton.getText();
+
         if(response != null){
-            conStatus.setText("Connection reussie!");
             HelloApplication m = new HelloApplication();
-            m.changeScene("gestionUsers.fxml");
+            if(response instanceof Administrateur && typeValue.equals("administrateur")){
+                conStatus.setText("Connection reussie!");
+                Thread.sleep(2000);
+                m.changeScene("getstionUsers.fxml");
+            }else if(response instanceof Technicien && typeValue.equals("technicien")) {
+                conStatus.setText("Connection reussie!");
+                Thread.sleep(2000);
+                m.changeScene("gestionCapteurs.fxml");
+            }else if(typeValue.equals("utilisateur")){
+                conStatus.setText("Connection reussie!");
+                Thread.sleep(2000);
+                m.changeScene("dashboard.fxml");
+            }
         }else{
             conStatus.setText("Connection echoue!");
         }
     }
+
+
 }

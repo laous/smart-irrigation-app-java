@@ -120,12 +120,10 @@ public class GestionUsers implements Initializable {
         }else{
             setErrorLabel("Utilisateur non ajoute, type est incorrect.");
         }
+        clearInputs();
 
 
     }
-
-
-
 
     @FXML
     private void updateButton() throws SQLException {
@@ -159,6 +157,7 @@ public class GestionUsers implements Initializable {
         }else{
             setErrorLabel("Utilisateur non modifie, type est incorrect.");
         }
+        clearInputs();
     }
 
     @FXML
@@ -167,35 +166,35 @@ public class GestionUsers implements Initializable {
             Utilisateur user = new Utilisateur(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
             boolean status = utilisateurUtile.supprimerUtilisateur(user);
             if (status) {
-                setErrorLabel("Utilisateur ajoute");
+                setErrorLabel("Utilisateur supprime");
                 showUsers();
             } else {
-                setErrorLabel("Utilisateur non ajoute");
+                setErrorLabel("Utilisateur non supprime");
             }
         }else if(typeUtilisateur.getText().equals("admin")){
             Administrateur user = new Administrateur(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
-            boolean status = utilisateurUtile.ajouterUtilisateur(user);
+            boolean status = utilisateurUtile.supprimerUtilisateur(user);
             if (status) {
-                setErrorLabel("Admin ajoute");
+                setErrorLabel("Admin supprime");
                 showUsers();
             } else {
-                setErrorLabel("Admin non ajoute");
+                setErrorLabel("Admin non supprime");
             }
         }else if(typeUtilisateur.getText().equals("technicien")){
             Technicien user = new Technicien(Integer.parseInt(idUtilisateur.getText()),nomUtilisateur.getText(),prenomUtilisateur.getText(),usernameUtilisateur.getText(),passwordUtilisateur.getText(),cinUtilisateur.getText());
-            boolean status = utilisateurUtile.ajouterUtilisateur(user);
+            boolean status = utilisateurUtile.supprimerUtilisateur(user);
             if (status) {
-                setErrorLabel("Technicien ajoute");
+                setErrorLabel("Technicien supprime");
                 showUsers();
             } else {
-                setErrorLabel("Technicien non ajoute");
+                setErrorLabel("Technicien non supprime");
             }
         }else{
             setErrorLabel("Utilisateur non ajoute, type est incorrect.");
         }
+        clearInputs();
 
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -228,7 +227,6 @@ public class GestionUsers implements Initializable {
         return usersList;
     }
 
-
     public void showUsers() throws SQLException {
         ObservableList<Utilisateur> list = getUsersList();
 
@@ -243,12 +241,6 @@ public class GestionUsers implements Initializable {
         TableView.setItems(list);
     }
 
-    @FXML
-    public void handleMouseAction(MouseEvent ev){
-
-
-    }
-
     public void handleMouseAction(javafx.scene.input.MouseEvent mouseEvent) {
         Utilisateur user = TableView.getSelectionModel().getSelectedItem();
         idUtilisateur.setText(String.valueOf(user.getIdUser()));
@@ -259,4 +251,15 @@ public class GestionUsers implements Initializable {
         typeUtilisateur.setText(user.getType());
         passwordUtilisateur.setText(user.getPassword());
     }
+
+    public void clearInputs(){
+        idUtilisateur.setText("");
+        nomUtilisateur.setText("");
+        prenomUtilisateur.setText("");
+        cinUtilisateur.setText("");
+        usernameUtilisateur.setText("");
+        typeUtilisateur.setText("");
+        passwordUtilisateur.setText("");
+    }
+
 }
