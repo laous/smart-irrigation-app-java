@@ -7,8 +7,8 @@ public class CapteurTemperature extends Capteur{
 
     float temperature;
 
-    public CapteurTemperature(String code,String etat,float temperature) {
-        super(code,etat);
+    public CapteurTemperature(String code,String etat,int zone,float temperature) {
+        super(code,etat,zone);
         this.temperature = temperature;
     }
 

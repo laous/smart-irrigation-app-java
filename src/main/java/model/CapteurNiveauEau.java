@@ -7,8 +7,8 @@ public class CapteurNiveauEau extends Capteur {
 
     float niveau;
 
-    public CapteurNiveauEau(String code, String etat, float niveau) {
-        super(code, etat);
+    public CapteurNiveauEau(String code, String etat,int zone, float niveau) {
+        super(code, etat,zone);
         this.niveau = niveau;
     }
 

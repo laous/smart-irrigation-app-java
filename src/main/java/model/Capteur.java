@@ -7,8 +7,9 @@ public abstract class Capteur {
 
     private String code;
     private String etat;
+    private int zone;
 
-    Capteur(String code,String etat) {
+    Capteur(String code,String etat,int zone) {
         this.code = code;
         this.etat = etat;
     }
