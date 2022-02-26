@@ -14,12 +14,7 @@
     <children>
         <VBox layoutX="180.0" layoutY="277.0" prefHeight="183.0" prefWidth="91.0" spacing="15.0">
             <children>
-                <Label text="ID">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Label>
-                <Label text="Nom">
+                <Label text="Code">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -29,6 +24,16 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
+                <Label text="Etat">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            <Label text="Type">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             </children>
         </VBox>
         <VBox layoutX="330.0" layoutY="277.0" prefHeight="129.0" prefWidth="234.0" spacing="10.0">
@@ -36,22 +41,24 @@
                 <TextField fx:id="codeCapteur" />
                 <TextField fx:id="zoneCapteur" />
                 <TextField fx:id="etatCapteur" />
-
+                <TextField fx:id="typeCapteur" />
             </children>
         </VBox>
-        <HBox layoutX="272.0" layoutY="407.0" spacing="10.0">
+        <HBox layoutX="246.0" layoutY="429.0" spacing="10.0">
             <children>
                 <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
                 <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
                 <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
             </children>
         </HBox>
-        <TableView fx:id="TableView" prefHeight="250.0" prefWidth="700.0">
+        <TableView fx:id="TableView" onMouseClicked="#handleMouseAction" prefHeight="250.0" prefWidth="700.0">
             <columns>
                 <TableColumn fx:id="codeColumn" prefWidth="73.59997248649597" text="Code" />
                 <TableColumn fx:id="zoneColumn" prefWidth="133.6000518798828" text="Zone" />
                 <TableColumn fx:id="etatColumn" prefWidth="133.6000518798828" text="Etat" />
+                <TableColumn fx:id="typeColumn" prefWidth="133.6000518798828" text="Type" />
             </columns>
         </TableView>
+      <Label fx:id="errorLabel" layoutX="252.0" layoutY="469.0" prefHeight="18.0" prefWidth="234.0" textAlignment="JUSTIFY" textFill="RED" />
     </children>
 </AnchorPane>

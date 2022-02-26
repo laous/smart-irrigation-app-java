@@ -1,23 +1,19 @@
 package controller;
 
 
+import dao.CapteurUtile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Utilisateur;
+import model.*;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 
@@ -25,6 +21,8 @@ import java.util.ResourceBundle;
 
 
 public class GestionCapteurs implements Initializable {
+
+    CapteurUtile<Capteur> capteurUtile = new CapteurUtile<>(getConnection());
 
     @FXML
     private TextField codeCapteur;
@@ -36,6 +34,9 @@ public class GestionCapteurs implements Initializable {
     private TextField zoneCapteur;
 
     @FXML
+    private TextField typeCapteur;
+
+    @FXML
     private Button insertButton;
 
     @FXML
@@ -45,97 +46,170 @@ public class GestionCapteurs implements Initializable {
     private Button deleteButton;
 
     @FXML
-    private TableView<Utilisateur> TableView;
+    Label errorLabel;
 
     @FXML
-    private TableColumn<Utilisateur, Integer> codeColumn;
+    private TableView<Capteur> TableView;
 
     @FXML
-    private TableColumn<Utilisateur, String> etatColumn;
+    private TableColumn<Capteur, String> codeColumn;
 
     @FXML
-    private TableColumn<Utilisateur, String> zoneColumn;
+    private TableColumn<Capteur, String> etatColumn;
 
     @FXML
-    private void insertButton() {
-//        String query = "insert into 4 values("+idCapteur.getText()+",'"+nomCapteur.getText()+"','"+zoneCapteur.getText()+"'";        executeQuery(query);
-//        showBooks();
+    private TableColumn<Capteur, Integer> zoneColumn;
+
+    @FXML
+    private TableColumn<Capteur , String> typeColumn;
+
+    public GestionCapteurs() throws SQLException {
+    }
+
+    public void setErrorLabel(String s){
+        errorLabel.setText(s);
     }
 
 
     @FXML
-    private void updateButton() {
-//        String query = "UPDATE books SET Title='"+nom.getText()+"',Author='"+authorField.getText()+"',Year="+yearField.getText()+",Pages="+pagesField.getText()+" WHERE ID="+idCapteur.getText()+"";
-//        executeQuery(query);
-//        showBooks();
+    private void insertButton() throws SQLException {
+        if(typeCapteur.getText().equals("humidite")){
+            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            boolean status = capteurUtile.ajouterCapteur(ch);
+            if (status) {
+                setErrorLabel("Capteur ajoute");
+                showCapteurs();
+                clearInputs();
+            } else {
+                setErrorLabel("Capteur non ajoute");
+            }
+        }else if(typeCapteur.getText().equals("temperature")){
+            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            boolean status = capteurUtile.ajouterCapteur(ct);
+            if (status) {
+                setErrorLabel("Capteur ajoute");
+                showCapteurs();
+                clearInputs();
+            } else {
+                setErrorLabel("Capteur non ajoute");
+            }
+        } else {
+            setErrorLabel("Capteur non ajoute");
+        }
+    }
+
+
+    @FXML
+    private void updateButton() throws SQLException {
+        if(typeCapteur.getText().equals("humidite")){
+            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            boolean status = capteurUtile.majCapteur(ch);
+            if (status) {
+                setErrorLabel("Capteur modifie");
+                showCapteurs();
+                clearInputs();
+            } else {
+                setErrorLabel("Capteur non modifie");
+            }
+        }else if(typeCapteur.getText().equals("temperature")){
+            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            boolean status = capteurUtile.majCapteur(ct);
+            if (status) {
+                setErrorLabel("Capteur modifie");
+                showCapteurs();
+                clearInputs();
+            } else {
+                setErrorLabel("Capteur non modifie");
+            }
+        } else {
+            setErrorLabel("Capteur non modifie");
+        }
     }
 
     @FXML
-    private void deleteButton() {
-//        String query = "DELETE FROM books WHERE ID="+idCapteur.getText()+"";
-//        executeQuery(query);
-//        showBooks();
+    private void deleteButton() throws SQLException {
+        if(typeCapteur.getText().equals("humidite")){
+            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            boolean status = capteurUtile.supprimerCapteur(ch);
+            if (status) {
+                setErrorLabel("Capteur supprime");
+                showCapteurs();
+                clearInputs();
+            } else {
+                setErrorLabel("Capteur non supprime");
+            }
+        }else if(typeCapteur.getText().equals("temperature")){
+            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            boolean status = capteurUtile.supprimerCapteur(ct);
+            if (status) {
+                setErrorLabel("Capteur supprime");
+                showCapteurs();
+                clearInputs();
+            } else {
+                setErrorLabel("Capteur non supprime");
+            }
+        } else {
+            setErrorLabel("Capteur non supprime");
+        }
     }
 
-    public void executeQuery(String query) {
-//        Connection conn = getConnection();
-//        Statement st;
-//        try {
-//            st = conn.createStatement();
-//            st.executeUpdate(query);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        showBooks();
+        try {
+            showCapteurs();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Connection getConnection() {
         Connection conn;
-//        try {
-//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","admin");
-//            return conn;
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return null;
-//        }
-        return null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/irrigation","root","");
+            return conn;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public ObservableList<Utilisateur> getBooksList(){
-//        ObservableList<Utilisateur> booksList = FXCollections.observableArrayList();
-//        Connection connection = getConnection();
-//        String query = "SELECT * FROM books ";
-//        Statement st;
-//        ResultSet rs;
-//
-//        try {
-//            st = connection.createStatement();
-//            rs = st.executeQuery(query);
-//            Utilisateur users;
-//            while(rs.next()) {
-//                users = new Utilisateur();
-//                booksList.add(users);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return booksList;
-        return null;
+    public ObservableList<Capteur> getCapteurList() throws SQLException {
+        ObservableList<Capteur> capteurs = FXCollections.observableArrayList();
+        LinkedList<Capteur> linkedCapteurs = capteurUtile.getAllCapteurs();
+        for(Capteur c : linkedCapteurs){
+            capteurs.add(c);
+        }
+
+        return capteurs;
     }
 
     // I had to change ArrayList to ObservableList I didn't find another option to do this but this works :)
-    public void showBooks() {
-        ObservableList<Utilisateur> list = getBooksList();
+    public void showCapteurs() throws SQLException {
+        ObservableList<Capteur> list = getCapteurList();
 
-//        idColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,Integer>("id"));
-//        nomColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("title"));
-//        zoneColumn.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("author"));
+        etatColumn.setCellValueFactory(new PropertyValueFactory<Capteur,String>("etat"));
+        zoneColumn.setCellValueFactory(new PropertyValueFactory<Capteur,Integer>("zone"));
+        codeColumn.setCellValueFactory(new PropertyValueFactory<Capteur,String>("code"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Capteur,String>("type"));
 
         TableView.setItems(list);
+    }
+
+    public void handleMouseAction(javafx.scene.input.MouseEvent mouseEvent) {
+        Capteur c = TableView.getSelectionModel().getSelectedItem();
+        codeCapteur.setText(String.valueOf(c.getCode()));
+        zoneCapteur.setText((String.valueOf(c.getZone())));
+        typeCapteur.setText(c.getType());
+        etatCapteur.setText(c.getEtat());
+    }
+
+    public void clearInputs(){
+        etatCapteur.setText("");
+        typeCapteur.setText("");
+        zoneCapteur.setText("");
+        codeCapteur.setText("");
+
     }
 
 }
