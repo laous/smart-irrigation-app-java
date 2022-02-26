@@ -8,12 +8,12 @@ public class CapteurHumidite extends Capteur{
 
     float humidite;
 
-    public CapteurHumidite(String code, String etat, int zone){
+    public CapteurHumidite(String code, String etat, String zone){
         super(code, etat, zone);
         this.type ="humidite";
     }
 
-    public CapteurHumidite(String code,String etat,int zone, float humudite) {
+    public CapteurHumidite(String code,String etat,String zone, float humudite) {
         super(code,etat,zone);
         this.humidite = humudite;
         this.type ="humidite";

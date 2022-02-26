@@ -7,7 +7,7 @@ public abstract class Capteur {
 
     private String code;
     private String etat;
-    private int zone;
+    private String zone;
     protected String type;
 
     public String getType() {
@@ -18,15 +18,15 @@ public abstract class Capteur {
         this.type = type;
     }
 
-    public int getZone() {
+    public String getZone() {
         return zone;
     }
 
-    public void setZone(int zone) {
+    public void setZone(String zone) {
         this.zone = zone;
     }
 
-    Capteur(String code, String etat, int zone) {
+    Capteur(String code, String etat, String zone) {
         this.code = code;
         this.etat = etat;
         if(this instanceof CapteurTemperature){

@@ -58,7 +58,7 @@ public class GestionCapteurs implements Initializable {
     private TableColumn<Capteur, String> etatColumn;
 
     @FXML
-    private TableColumn<Capteur, Integer> zoneColumn;
+    private TableColumn<Capteur, String> zoneColumn;
 
     @FXML
     private TableColumn<Capteur , String> typeColumn;
@@ -74,7 +74,7 @@ public class GestionCapteurs implements Initializable {
     @FXML
     private void insertButton() throws SQLException {
         if(typeCapteur.getText().equals("humidite")){
-            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),zoneCapteur.getText());
             boolean status = capteurUtile.ajouterCapteur(ch);
             if (status) {
                 setErrorLabel("Capteur ajoute");
@@ -84,7 +84,7 @@ public class GestionCapteurs implements Initializable {
                 setErrorLabel("Capteur non ajoute");
             }
         }else if(typeCapteur.getText().equals("temperature")){
-            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),zoneCapteur.getText());
             boolean status = capteurUtile.ajouterCapteur(ct);
             if (status) {
                 setErrorLabel("Capteur ajoute");
@@ -102,7 +102,7 @@ public class GestionCapteurs implements Initializable {
     @FXML
     private void updateButton() throws SQLException {
         if(typeCapteur.getText().equals("humidite")){
-            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),zoneCapteur.getText());
             boolean status = capteurUtile.majCapteur(ch);
             if (status) {
                 setErrorLabel("Capteur modifie");
@@ -112,7 +112,7 @@ public class GestionCapteurs implements Initializable {
                 setErrorLabel("Capteur non modifie");
             }
         }else if(typeCapteur.getText().equals("temperature")){
-            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),zoneCapteur.getText());
             boolean status = capteurUtile.majCapteur(ct);
             if (status) {
                 setErrorLabel("Capteur modifie");
@@ -129,7 +129,7 @@ public class GestionCapteurs implements Initializable {
     @FXML
     private void deleteButton() throws SQLException {
         if(typeCapteur.getText().equals("humidite")){
-            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            CapteurHumidite ch = new CapteurHumidite(codeCapteur.getText(), etatCapteur.getText(),zoneCapteur.getText());
             boolean status = capteurUtile.supprimerCapteur(ch);
             if (status) {
                 setErrorLabel("Capteur supprime");
@@ -139,7 +139,7 @@ public class GestionCapteurs implements Initializable {
                 setErrorLabel("Capteur non supprime");
             }
         }else if(typeCapteur.getText().equals("temperature")){
-            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),Integer.parseInt(zoneCapteur.getText()));
+            CapteurTemperature ct = new CapteurTemperature(codeCapteur.getText(), etatCapteur.getText(),zoneCapteur.getText());
             boolean status = capteurUtile.supprimerCapteur(ct);
             if (status) {
                 setErrorLabel("Capteur supprime");
@@ -189,7 +189,7 @@ public class GestionCapteurs implements Initializable {
         ObservableList<Capteur> list = getCapteurList();
 
         etatColumn.setCellValueFactory(new PropertyValueFactory<Capteur,String>("etat"));
-        zoneColumn.setCellValueFactory(new PropertyValueFactory<Capteur,Integer>("zone"));
+        zoneColumn.setCellValueFactory(new PropertyValueFactory<Capteur,String>("zone"));
         codeColumn.setCellValueFactory(new PropertyValueFactory<Capteur,String>("code"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Capteur,String>("type"));
 
@@ -198,8 +198,8 @@ public class GestionCapteurs implements Initializable {
 
     public void handleMouseAction(javafx.scene.input.MouseEvent mouseEvent) {
         Capteur c = TableView.getSelectionModel().getSelectedItem();
-        codeCapteur.setText(String.valueOf(c.getCode()));
-        zoneCapteur.setText((String.valueOf(c.getZone())));
+        codeCapteur.setText(c.getCode());
+        zoneCapteur.setText(c.getZone());
         typeCapteur.setText(c.getType());
         etatCapteur.setText(c.getEtat());
     }
