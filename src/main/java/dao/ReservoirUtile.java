@@ -89,4 +89,13 @@ public class ReservoirUtile {
         int nbUpdated = stmt.executeUpdate(query);
         return nbUpdated > 0;
     }
+
+    public String getReservoirEtat(Reservoir r) throws SQLException {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from reservoirs where code='"+r.getCode()+"'");
+        while (rs.next()){
+            return rs.getString("etat");
+        }
+        return "";
+    }
 }
