@@ -90,6 +90,14 @@ public class ReservoirUtile {
         return nbUpdated > 0;
     }
 
+    public boolean updateEtatReservoir(Reservoir r, String etat) throws SQLException {
+        Statement stmt = con.createStatement();
+        String query = "UPDATE reservoirs SET etat=" + etat + " where code like '" + r.getCode() + "'";
+
+        int nbUpdated = stmt.executeUpdate(query);
+        return nbUpdated > 0;
+    }
+
     public String getReservoirEtat(Reservoir r) throws SQLException {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from reservoirs where code='"+r.getCode()+"'");
