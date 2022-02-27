@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class Reservoir1 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        Reservoir r = new Reservoir("APS56","2");
+        Reservoir r = new Reservoir("R1","1");
 
         String hote = "127.0.0.1";
         int port = 3001;

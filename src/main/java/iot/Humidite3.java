@@ -2,22 +2,20 @@ package iot;
 
 import model.Capteur;
 import model.CapteurHumidite;
-import model.CapteurTemperature;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author Jonas
  */
 
-public class Humidite1 {
+public class Humidite3 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        Capteur c = new CapteurHumidite("H1", "A", "1");
+        Capteur c = new CapteurHumidite("H3", "A", "3");
 
         String hote = "127.0.0.1";
         int port = 3000;

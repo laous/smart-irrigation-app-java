@@ -16,7 +16,7 @@ public class Temperature1 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        Capteur c = new CapteurTemperature("T4", "a", "1");
+        Capteur c = new CapteurTemperature("T1", "a", "1");
 
         String hote = "127.0.0.1";
         int port = 3003;
@@ -27,7 +27,7 @@ public class Temperature1 {
 
         sendInfosReservoir(sortie,c);
 
-        BufferedReader fs = new BufferedReader(new FileReader("D:\\Top Secret\\WebDev\\Java Workspace\\smart-irrigation-app-java\\src\\main\\java\\iot\\temperature1.txt"));
+        BufferedReader fs = new BufferedReader(new FileReader("D:\\MIOLA\\irrigation-app\\src\\main\\java\\iot\\temperature1.txt"));
 
         String data = null;
         while ((data = fs.readLine()) != null) {
