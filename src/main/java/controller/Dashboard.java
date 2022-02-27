@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Dashboard {
 
@@ -87,6 +89,18 @@ public class Dashboard {
 
 
     public void handleCLick(MouseEvent mouseEvent) throws SQLException {
+        // do it every n seconds
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                try {
+//                    showValues();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, 0, 1000);
         showValues();
     }
 
@@ -103,8 +117,10 @@ public class Dashboard {
         humiditeLabel1.setText("Humidite = " + h1);
         if(h1<15){
             // irrigation lance
+            // change bg
         }else{
             // irrigation stope
+            // change bg
         }
         zonePane1.setStyle("-fx-background-color:rgba(255, 255, 255, 0.87);");
 
