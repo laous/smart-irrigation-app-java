@@ -54,29 +54,33 @@ public class ServeurReservoir extends Thread {
             try {
                 streamIn = soc.getInputStream();
                 BufferedReader entree = new BufferedReader(new InputStreamReader(streamIn));
-
                 Reservoir r = getInfosReservoir(entree);
 
                 while (true) {
-                    Thread.sleep(30000);
-                    String data = entree.readLine();
-                    if (data != null) {
-                        float niveau = Float.parseFloat(data);
-                        //Traitement à realiser
-                        boolean updated = resDAO.updateNiveauReservoir(r,niveau);
-                    } else {
-                        break;
+                    if(getReservoirEtat(r).equals("a")){
+                        Thread.sleep(5000);
+                        String data = entree.readLine();
+                        if (data != null) {
+                            System.out.println(data);
+                            float niveau = Float.parseFloat(data);
+                            //Traitement à realiser
+                            boolean updated = resDAO.updateNiveauReservoir(r, niveau);
+                            System.out.println("Updated: " + updated);
+                        } else {
+                            break;
+                        }
+                    }else {
+                        System.out.println("Sleep...");
                     }
+
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ServeurReservoir.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
+//                Logger.getLogger(ServeurReservoir.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException | SQLException e) {
                 e.printStackTrace();
             } finally {
                 try {
-                    streamOut.close();
+//                    streamOut.close();
                     streamIn.close();
                 } catch (IOException ex) {
                     Logger.getLogger(ServeurReservoir.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,11 +89,15 @@ public class ServeurReservoir extends Thread {
         }
 
         public static Reservoir getInfosReservoir(BufferedReader entree) throws IOException {
-            Reservoir r = null;
+            System.out.println("Reading infos");
             String code = entree.readLine(); // get infos code
             String zone = entree.readLine(); // get infos zone
 
-            return new Reservoir(code,zone);
+            return new Reservoir(code, zone);
+        }
+
+        public String getReservoirEtat(Reservoir r) throws SQLException {
+            return resDAO.getReservoirEtat(r);
         }
     }
 }

@@ -9,6 +9,8 @@ package dao;
  * and open the template in the editor.
  */
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +20,7 @@ import java.util.LinkedList;
 import model.Capteur;
 import model.CapteurHumidite;
 import model.CapteurTemperature;
+import model.Reservoir;
 
 
 public class CapteurUtile<T extends Capteur> {
@@ -133,14 +136,14 @@ public class CapteurUtile<T extends Capteur> {
         return nbUpdated > 0;
     }
 
-    public boolean updateCapteurValue(T c) throws SQLException {
+    public boolean updateCapteurValue(T c, float valeur) throws SQLException {
         Statement stmt = con.createStatement();
         String query = "";
 
         if (c instanceof CapteurHumidite) {
-            query = "UPDATE capteurs SET valeur='" + ((CapteurHumidite) c).getHumidite() +"' where code like '" + c.getCode() + "' and type like 'humidite'";
+            query = "UPDATE capteurs SET valeur=" + valeur +" where code like '" + c.getCode() + "' and type like 'humidite'";
         } else if (c instanceof CapteurTemperature) {
-            query = "UPDATE capteurs SET valeur='" + ((CapteurTemperature) c).getTemperature() +"' where code like '" + c.getCode() + "' and type like 'temperature'";
+            query = "UPDATE capteurs SET valeur=" + valeur +" where code like '" + c.getCode() + "' and type like 'temperature'";
         }
         int nbUpdated = stmt.executeUpdate(query);
         return nbUpdated > 0;

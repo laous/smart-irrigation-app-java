@@ -1,6 +1,9 @@
 package server;
 
 import dao.CapteurUtile;
+import model.Capteur;
+import model.CapteurHumidite;
+import model.CapteurTemperature;
 import util.ConnectionBD;
 
 import java.io.*;
@@ -37,7 +40,7 @@ public class ServeurTemperature extends Thread {
 
         private Socket soc;
         Connection con = ConnectionBD.con;
-        private CapteurUtile capDAO = new CapteurUtile(con);
+        private final CapteurUtile<Capteur> capteurDAO = new CapteurUtile<>(con);
 
 
         public SocketThread(Socket soc) throws SQLException {
@@ -49,31 +52,44 @@ public class ServeurTemperature extends Thread {
             InputStream streamIn = null;
 
             try {
+                streamIn = soc.getInputStream();
+                BufferedReader entree = new BufferedReader(new InputStreamReader(streamIn));
+                Capteur c = getInfos(entree);
+
                 while (true) {
-                    streamIn = soc.getInputStream();
-                    BufferedReader entree = new BufferedReader(new InputStreamReader(streamIn));
-                    Thread.sleep(30000);
+                    Thread.sleep(5000);
                     String data = entree.readLine();
                     if (data != null) {
                         float temperature = Float.parseFloat(data);
                         //Traitement à realiser
-                        // capDAO.majCapteurByTemp(temp)
+                        System.out.println(temperature);
+                        boolean updated = capteurDAO.updateCapteurValue(c, temperature);
+                        System.out.println("Updated " + updated);
                     } else {
                         break;
                     }
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ServeurTemperature.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InterruptedException e) {
+//                Logger.getLogger(ServeurTemperature.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException | SQLException e) {
                 e.printStackTrace();
             } finally {
                 try {
-                    streamOut.close();
+//                    streamOut.close();
                     streamIn.close();
                 } catch (IOException ex) {
                     Logger.getLogger(ServeurTemperature.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        }
+
+        public Capteur getInfos(BufferedReader entree) throws IOException {
+            System.out.println("Reading infos");
+            String code = entree.readLine(); // get infos code
+            String etat = entree.readLine(); // get infos code
+            String zone = entree.readLine(); // get infos zone
+
+            return new CapteurTemperature(code, etat, zone);
         }
     }
 }
