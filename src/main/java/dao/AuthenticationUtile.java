@@ -19,8 +19,8 @@ public class AuthenticationUtile {
     public AuthenticationUtile(Connection con){
         this.con = con;
     }
-    public Utilisateur authentication(String username, String password ) throws SQLException {
-        String query = "SELECT * FROM users WHERE username like '"+username+"' and password like '"+password+"'";
+    public Utilisateur authentication(String username, String password , String type) throws SQLException {
+        String query = "SELECT * FROM users WHERE username like '"+username+"' and password like '"+password+"' and type like '"+type+"'";
 
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(query);
