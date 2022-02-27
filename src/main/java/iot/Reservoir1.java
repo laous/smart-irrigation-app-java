@@ -26,11 +26,12 @@ public class Reservoir1 {
         // send infos reservoir
         sendInfosReservoir(sortie,r);
 
-        BufferedReader fs = new BufferedReader(new FileReader("D:\\Top Secret\\WebDev\\Java Workspace\\smart-irrigation-app-java\\src\\main\\java\\iot\\temperature1.txt"));
+        BufferedReader fs = new BufferedReader(new FileReader("D:\\Top Secret\\WebDev\\Java Workspace\\smart-irrigation-app-java\\src\\main\\java\\iot\\reservoir1.txt"));
         String data = null;
         while ((data = fs.readLine()) != null) {
             System.out.println(data);
-            TimeUnit.SECONDS.sleep(30); // sleep 30 secs
+            TimeUnit.SECONDS.sleep(5); // sleep 30 secs
+
             //l'envoyer au serveur reservoir
             sortie.write(data + "\n");
             sortie.flush(); // forcer l'envoi
@@ -38,6 +39,7 @@ public class Reservoir1 {
     }
 
     public static void sendInfosReservoir(OutputStreamWriter sortie, Reservoir c) throws IOException {
+        System.out.println("Sending infos");
         sortie.write(c.getCode()+"\n"); // send code
         sortie.flush();
         sortie.write(c.getZone()+"\n"); // send zone

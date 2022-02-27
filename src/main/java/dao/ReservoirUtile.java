@@ -84,7 +84,7 @@ public class ReservoirUtile {
 
     public boolean updateNiveauReservoir(Reservoir r, float niveau) throws SQLException {
         Statement stmt = con.createStatement();
-        String query = "UPDATE reservoirs SET valeur='" + r.getNiveau() + "' where code like '" + r.getCode() + "'";
+        String query = "UPDATE reservoirs SET valeur=" + niveau + " where code like '" + r.getCode() + "'";
 
         int nbUpdated = stmt.executeUpdate(query);
         return nbUpdated > 0;
