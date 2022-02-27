@@ -75,7 +75,7 @@ public class ServeurTemperature extends Thread {
                 e.printStackTrace();
             } finally {
                 try {
-                    streamOut.close();
+//                    streamOut.close();
                     streamIn.close();
                 } catch (IOException ex) {
                     Logger.getLogger(ServeurTemperature.class.getName()).log(Level.SEVERE, null, ex);
