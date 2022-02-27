@@ -24,7 +24,7 @@ public class Reservoir3 {
         // send infos reservoir
         sendInfosReservoir(sortie,r);
 
-        BufferedReader fs = new BufferedReader(new FileReader("D:\\Top Secret\\WebDev\\Java Workspace\\smart-irrigation-app-java\\src\\main\\java\\iot\\reservoir1.txt"));
+        BufferedReader fs = new BufferedReader(new FileReader("D:\\MIOLA\\irrigation-app\\src\\main\\java\\iot\\reservoir1.txt"));
         String data = null;
         while ((data = fs.readLine()) != null) {
             System.out.println(data);
