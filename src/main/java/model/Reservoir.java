@@ -5,27 +5,28 @@ package model;
  */
 public class Reservoir {
 
-    String code_reservoir;
+    String code;
     float niveau;
     String zone;
+    String etat;
 
-    public Reservoir(String code_reservoir,String zone) {
-        this.code_reservoir = code_reservoir;
+    public Reservoir(String code, String zone) {
+        this.code = code;
         this.zone = zone;
     }
 
-    public Reservoir(String code_reservoir, float niveau,String zone) {
-        this.code_reservoir = code_reservoir;
+    public Reservoir(String code, float niveau, String zone) {
+        this.code = code;
         this.niveau = niveau;
         this.zone = zone;
     }
 
     public String getCode() {
-        return code_reservoir;
+        return code;
     }
 
-    public void setCode_reservoir(String code_reservoir) {
-        this.code_reservoir = code_reservoir;
+    public void setCode(String code_reservoir) {
+        this.code = code_reservoir;
     }
 
     public float getNiveau() {
@@ -36,12 +37,16 @@ public class Reservoir {
         this.niveau = niveau;
     }
 
-    public String getCode_reservoir() {
-        return code_reservoir;
-    }
-
     public String getZone() {
         return zone;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 
     public void setZone(String zone) {

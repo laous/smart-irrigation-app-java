@@ -16,7 +16,7 @@ public class Temperature1 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        Capteur c = new CapteurTemperature("T4\n", "a", "1");
+        Capteur c = new CapteurTemperature("T4", "a", "1");
 
         String hote = "127.0.0.1";
         int port = 3003;

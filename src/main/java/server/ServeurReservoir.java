@@ -57,18 +57,22 @@ public class ServeurReservoir extends Thread {
                 Reservoir r = getInfosReservoir(entree);
 
                 while (true) {
-
-                    Thread.sleep(5000);
-                    String data = entree.readLine();
-                    if (data != null) {
-                        System.out.println(data);
-                        float niveau = Float.parseFloat(data);
-                        //Traitement à realiser
-                        boolean updated = resDAO.updateNiveauReservoir(r, niveau);
-                        System.out.println("Updated: " + updated);
-                    } else {
-                        break;
+                    if(getReservoirEtat(r).equals("a")){
+                        Thread.sleep(5000);
+                        String data = entree.readLine();
+                        if (data != null) {
+                            System.out.println(data);
+                            float niveau = Float.parseFloat(data);
+                            //Traitement à realiser
+                            boolean updated = resDAO.updateNiveauReservoir(r, niveau);
+                            System.out.println("Updated: " + updated);
+                        } else {
+                            break;
+                        }
+                    }else {
+                        System.out.println("Sleep...");
                     }
+
                 }
             } catch (IOException ex) {
 //                Logger.getLogger(ServeurReservoir.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,6 +94,10 @@ public class ServeurReservoir extends Thread {
             String zone = entree.readLine(); // get infos zone
 
             return new Reservoir(code, zone);
+        }
+
+        public String getReservoirEtat(Reservoir r) throws SQLException {
+            return resDAO.getReservoirEtat(r);
         }
     }
 }
