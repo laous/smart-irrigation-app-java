@@ -9,17 +9,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Dashboard">
    <top>
-      <AnchorPane prefHeight="102.0" prefWidth="700.0" style="-fx-background-color: #443;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="73.0" prefWidth="700.0" style="-fx-background-color: #443;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="84.0" layoutY="23.0" text="Dashboard" textFill="WHITE">
+            <Label layoutX="82.0" layoutY="11.0" text="Dashboard" textFill="WHITE">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <Button fx:id="backBtn" layoutX="554.0" layoutY="31.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px;" text="Retour" textFill="WHITE">
+            <Button fx:id="backBtn" layoutX="552.0" layoutY="18.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px;" text="Retour" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -30,46 +31,63 @@
    <center>
       <Pane prefHeight="398.0" prefWidth="512.0" style="-fx-background-color: #422;" BorderPane.alignment="CENTER">
          <children>
-            <Accordion layoutX="41.0" layoutY="107.0" />
-            <Pane layoutX="262.0" layoutY="199.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;" />
-            <Pane layoutX="47.0" layoutY="199.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;" />
-            <Pane fx:id="zonePane1" layoutX="47.0" layoutY="14.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;">
+            <Accordion layoutX="34.0" layoutY="154.0" />
+            <Pane layoutX="255.0" layoutY="246.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;">
+               <children>
+                  <Text fill="RED" layoutX="32.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucune Zone detecte" />
+               </children>
+            </Pane>
+            <Pane layoutX="40.0" layoutY="246.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;">
+               <children>
+                  <Text fill="RED" layoutX="32.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucune Zone detecte" />
+               </children>
+            </Pane>
+            <Pane fx:id="zonePane1" layoutX="40.0" layoutY="61.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: #E0DDAA;">
                <children>
                   <VBox alignment="CENTER" layoutX="14.0" layoutY="17.0" prefHeight="130.0" prefWidth="165.0" spacing="15.0">
                      <children>
-                        <Label fx:id="temperatureLabel1" onMouseClicked="#handleCLick" prefHeight="18.0" prefWidth="146.0" text="Temperature = 16.2" />
+                        <Label fx:id="temperatureLabel1" prefHeight="18.0" prefWidth="146.0" text="Temperature = 16.2" />
                         <Label fx:id="humiditeLabel1" prefHeight="18.0" prefWidth="142.0" text="Humidite =  13.7" />
-                        <Label fx:id="reservoirLabel1" prefHeight="18.0" prefWidth="134.0" text="Reservoir =" />
-                        <Label prefHeight="18.0" prefWidth="137.0" text="Label" />
+                        <Label fx:id="reservoirLabel1" prefHeight="18.0" prefWidth="143.0" text="Reservoir = 5.0" />
+                        <Label fx:id="resultat1" prefHeight="18.0" prefWidth="137.0" />
                      </children>
                   </VBox>
                </children>
             </Pane>
-            <Pane layoutX="262.0" layoutY="14.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;">
+            <Pane fx:id="zonePane2" layoutX="255.0" layoutY="61.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: #E0DDAA;">
                <children>
                   <VBox alignment="CENTER" layoutX="17.0" layoutY="14.0" prefHeight="130.0" prefWidth="165.0" spacing="15.0">
                      <children>
                         <Label fx:id="temperatureLabel2" onMouseClicked="#handleCLick" prefHeight="18.0" prefWidth="146.0" text="Temperature = 16.2" />
                         <Label fx:id="humiditeLabel2" prefHeight="18.0" prefWidth="142.0" text="Humidite =  13.7" />
-                        <Label fx:id="reservoirLabel2" prefHeight="18.0" prefWidth="134.0" text="Reservoir =" />
-                        <Label prefHeight="18.0" prefWidth="137.0" text="Label" />
+                        <Label fx:id="reservoirLabel2" prefHeight="18.0" prefWidth="142.0" text="Reservoir = 5.0" />
+                        <Label fx:id="resultat2" prefHeight="18.0" prefWidth="137.0" />
                      </children>
                   </VBox>
                </children>
             </Pane>
-            <Pane layoutX="469.0" layoutY="199.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;" />
-            <Pane layoutX="469.0" layoutY="14.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;">
+            <Pane layoutX="462.0" layoutY="246.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: white;">
+               <children>
+                  <Text fill="RED" layoutX="38.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucune Zone detecte" />
+               </children>
+            </Pane>
+            <Pane fx:id="zonePane3" layoutX="462.0" layoutY="61.0" prefHeight="163.0" prefWidth="177.0" style="-fx-background-color: #E0DDAA;">
                <children>
                   <VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="130.0" prefWidth="165.0" spacing="15.0">
                      <children>
                         <Label fx:id="temperatureLabel3" onMouseClicked="#handleCLick" prefHeight="18.0" prefWidth="146.0" text="Temperature = 16.2" />
                         <Label fx:id="humiditeLabel3" prefHeight="18.0" prefWidth="142.0" text="Humidite =  13.7" />
-                        <Label fx:id="reservoirLabel3" prefHeight="18.0" prefWidth="134.0" text="Reservoir =" />
-                        <Label prefHeight="18.0" prefWidth="137.0" text="Label" />
+                        <Label fx:id="reservoirLabel3" prefHeight="18.0" prefWidth="134.0" text="Reservoir = 5.0" />
+                        <Label fx:id="resultat3" prefHeight="18.0" prefWidth="137.0" />
                      </children>
                   </VBox>
                </children>
             </Pane>
+            <Button layoutX="315.0" layoutY="14.0" mnemonicParsing="false" onAction="#showValues" style="-fx-background-color: transparent; -fx-border-color: white;" text="Actualiser" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
    </center>
