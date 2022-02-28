@@ -54,8 +54,26 @@ public class UtilisateurUtile<T extends Utilisateur> {
         return user;
     }
 
+    public T getUserByUsername(String username) throws SQLException {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from users where username like '" + username + "'");
+        T user = null;
+
+        while(rs.next()){
+            if(rs.getString("type").equals("admin")){
+                user = (T) new Administrateur(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
+            }else if(rs.getString("type").equals("technicien")){
+                user = (T) new Technicien(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("username"), rs.getString("password"),rs.getString("cin"));
+            }
+        }
+        return user;
+    }
+
     public boolean ajouterUtilisateur(T user) throws SQLException {
         if(getUserByCIN(user.getCin()) != null){
+            return false;
+        }
+        if(getUserByUsername(user.getUsername()) != null){
             return false;
         }
         Statement stmt = con.createStatement();
