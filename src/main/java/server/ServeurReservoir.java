@@ -58,7 +58,7 @@ public class ServeurReservoir extends Thread {
 
                 while (true) {
                     if(getReservoirEtat(r).equals("a")){
-                        Thread.sleep(5000);
+                        Thread.sleep(3000);
                         String data = entree.readLine();
                         if (data != null) {
                             System.out.println(data);
