@@ -13,7 +13,9 @@ import model.Administrateur;
 import model.Technicien;
 import model.Utilisateur;
 import org.w3c.dom.events.MouseEvent;
+import view.HelloApplication;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 
@@ -262,4 +264,9 @@ public class GestionUsers implements Initializable {
         passwordUtilisateur.setText("");
     }
 
+    public void goBack(ActionEvent actionEvent) throws IOException {
+
+        HelloApplication m = new HelloApplication();
+        m.changeScene("admin.fxml");
+    }
 }
