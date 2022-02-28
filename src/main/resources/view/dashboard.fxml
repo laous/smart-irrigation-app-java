@@ -20,7 +20,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <Button fx:id="backBtn" layoutX="552.0" layoutY="18.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px;" text="Retour" textFill="WHITE">
+            <Button fx:id="backBtn" layoutX="552.0" layoutY="18.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px;" text="Se deconnecter" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
