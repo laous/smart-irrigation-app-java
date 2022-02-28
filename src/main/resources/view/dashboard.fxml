@@ -15,7 +15,7 @@
    <top>
       <AnchorPane prefHeight="73.0" prefWidth="700.0" style="-fx-background-color: #443;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="82.0" layoutY="11.0" text="Dashboard" textFill="WHITE">
+            <Label layoutX="82.0" layoutY="11.0" style="-fx-font-weight: bold;" text="Dashboard" textFill="WHITE">
                <font>
                   <Font size="36.0" />
                </font>
