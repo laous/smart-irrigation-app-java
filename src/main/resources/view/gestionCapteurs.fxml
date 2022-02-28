@@ -10,7 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionCapteurs">
+<?import javafx.scene.layout.BorderPane?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.Cursor?>
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionCapteurs">
+    <center>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
     <children>
         <VBox layoutX="180.0" layoutY="277.0" prefHeight="183.0" prefWidth="91.0" spacing="15.0">
             <children>
@@ -62,3 +69,24 @@
       <Label fx:id="errorLabel" layoutX="252.0" layoutY="469.0" prefHeight="18.0" prefWidth="234.0" textAlignment="JUSTIFY" textFill="RED" />
     </children>
 </AnchorPane>
+    </center>
+    <top>
+        <Pane prefHeight="75.0" prefWidth="700.0" style="-fx-background-color: #442;" BorderPane.alignment="CENTER">
+            <children>
+                <Text fill="WHITE" layoutX="78.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Bonjour, Technicien!">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Text>
+                <Button layoutX="556.0" layoutY="21.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2px;" text="Se deconnecter" textFill="#f7f7f7">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </Pane>
+    </top>
+</BorderPane>

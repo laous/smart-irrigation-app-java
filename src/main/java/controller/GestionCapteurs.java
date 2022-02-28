@@ -4,12 +4,15 @@ package controller;
 import dao.CapteurUtile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
+import view.HelloApplication;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 
@@ -210,6 +213,12 @@ public class GestionCapteurs implements Initializable {
         zoneCapteur.setText("");
         codeCapteur.setText("");
 
+    }
+
+    public void goBack(ActionEvent actionEvent) throws IOException {
+
+        HelloApplication m = new HelloApplication();
+        m.changeScene("login.fxml");
     }
 
 }
