@@ -67,7 +67,7 @@ public class HandleLogin {
             System.out.println(admin!=null ? admin.toString() : "null");
             if(admin !=null){
                 conStatus.setText("Connection reussie!");
-                m.changeScene("gestionUsers.fxml");
+                m.changeScene("admin.fxml");
             }else{
                 conStatus.setText("Connection echoue!");
             }
